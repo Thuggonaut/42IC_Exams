@@ -31,7 +31,7 @@ $>
 
 #include <unistd.h> //To call write()
 
-void union_c(const char *s1, const char *s2) //Define a function that takes in two strings, and writes to the STDOUT all the characters from either string, in the order of the command line
+void ft_union(const char *s1, const char *s2) //Define a function that takes in two strings, and writes to the STDOUT all the characters from either string, in the order of the command line
 {
     unsigned char found[256] = {0}; //Declare a character array of size `256` and initialize all its elements to `0`. It will be used to store the characters that have been found in both strings. See #1
 
@@ -58,7 +58,7 @@ void union_c(const char *s1, const char *s2) //Define a function that takes in t
 int main(int argc, char **argv) //`argv` is a pointer to an array of strings. By using a double pointer `char **argv`, the program can access and retrieve each individual argument as a null-terminated string
 {
     if (argc == 3) //Perform operations only if argc is three, meaning there needs to be two arguments in addition to the program name
-        union_c(argv[1], argv[2]);
+        ft_union(argv[1], argv[2]);
     write(1, "\n", 1);
     return (0);
 }
