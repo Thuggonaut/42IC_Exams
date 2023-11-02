@@ -28,7 +28,6 @@ $>
 $>./repeat_alpha "" | cat -e
 $
 $>
-
 */
 
 #include <unistd.h> //To call write()
