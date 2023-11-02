@@ -32,7 +32,7 @@ $>
 
 #include <unistd.h> //To call write()
 
-void    ft_putchar_times(char c, int n) //Define a function that write the character `c` to the standard output `n` number of times
+void    putchar_times(char c, int n) //Define a function that write the character `c` to the standard output `n` number of times
 {
     while (n > 0) //Loop until `n` becomes `0`
     {
@@ -46,12 +46,12 @@ void    repeat_alpha(char *s) //Define a function that takes a pointer to a chra
     while (*s) //Loop until the end of the string is reached
     {
         if (*s >= 'a' && *s <= 'z') //If the character is a lowercase character
-            ft_putchar_times(*s, *s + 1 - 'a'); //Print the current character, `*s + 1 - 'a'` number of times (the position of the character in the alphabet (e.g., 'd'(ASCII 100) + 1(101) - 'a'(ASCII 97) = 4, making it position three))
+            putchar_times(*s, *s + 1 - 'a'); //Print the current character, `*s + 1 - 'a'` number of times (the position of the character in the alphabet (e.g., 'd'(ASCII 100) + 1(101) - 'a'(ASCII 97) = 4, making it position three))
         else if (*s >= 'A' && *s <= 'Z') //If the character is a uppercase character
-            ft_putchar_times(*s, *s + 1 - 'A'); //Print the current character, `*s + 1 - 'a'` number of times (the position of the character in the alphabet (e.g., 'T'(ASCII 84) + 1(85) - 'A'(ASCII 65) = 20, making it position 20))
+            putchar_times(*s, *s + 1 - 'A'); //Print the current character, `*s + 1 - 'a'` number of times (the position of the character in the alphabet (e.g., 'T'(ASCII 84) + 1(85) - 'A'(ASCII 65) = 20, making it position 20))
         else
             write(1, s, 1); //If the current character is not alphabetical, print the character to the standard output
-        ++s; //Move to the next character for processing
+        s++; //Move to the next character for processing
     }
 }
 

@@ -72,7 +72,7 @@ The syntax is:
 
 #1  Initialising the pointer `reject_ptr` inside the outer loop is necessary because you want to reset the pointer to the beginning of `reject`
     for each character in `s`. 
-        - If you initialised `reject_ptr` outside the outer loop, it would not be reset to the beginning of `eject` in each iteration of the outer
+        - If you initialised `reject_ptr` outside the outer loop, it would not be reset to the beginning of `reject` in each iteration of the outer
           loop, which would lead to incorrect results.
 
     By initialising `reject_ptr` inside the outer loop, you ensure that it points to the beginning of `reject` each time the loop iterates over a 

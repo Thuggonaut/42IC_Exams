@@ -1,32 +1,33 @@
 /*
-Assignment name  : ft_range
-Expected files   : ft_range.c
+Assignment name  : ft_rrange
+Expected files   : ft_rrange.c
 Allowed functions: malloc
 --------------------------------------------------------------------------------
 
 Write the following function:
 
-int     *ft_range(int start, int end);
+int     *ft_rrange(int start, int end);
 
 It must allocate (with malloc()) an array of integers, fill it with consecutive
-values that begin at start and end at end (Including start and end !), then
+values that begin at end and end at start (Including start and end !), then
 return a pointer to the first value of the array.
 
 Examples:
 
-- With (1, 3) you will return an array containing 1, 2 and 3.
-- With (-1, 2) you will return an array containing -1, 0, 1 and 2.
+- With (1, 3) you will return an array containing 3, 2 and 1
+- With (-1, 2) you will return an array containing 2, 1, 0 and -1.
 - With (0, 0) you will return an array containing 0.
-- With (0, -3) you will return an array containing 0, -1, -2 and -3.
+- With (0, -3) you will return an array containing -3, -2, -1 and 0.
+
+***SIMILAR TO ft_range.c BUT IN REVERSE***
 */
+#include <stdlib.h>
 
-#include <stdlib.h> //To call malloc()
-
-int     *ft_range(int start, int end)
+int	*ft_rrange(int start, int end)
 {
+	int		*array;
+	int 	*current;
 	size_t	len;
-	int	*array;
-	int	*current;
 
 	len = (end - start + 1);
 	array = (int *)malloc(len * sizeof(int));
@@ -34,19 +35,19 @@ int     *ft_range(int start, int end)
 		return (NULL);
 	current = array;
 	while (len-- > 0)
-		*current++ = start++;
+		*current++ = end--;
 	return (array);
 }
 
 /*
 #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
-	int *array;
-	size_t len;
+	int		*array;
+	size_t	len; 
 
-	array = ft_range(-3, 10);
+	array = ft_rrange(-3, 10);
 	if (array)
 	{
 		len = 14;
@@ -54,5 +55,4 @@ int main(void)
 			printf("%d\n", *array++);
 	}
 	return (0);
-}
-*/
+}*/
