@@ -28,8 +28,7 @@ int	ft_atoi(const char *s) //Define a function that takes a string representatio
 
 	res = 0; //Initialised to `0` because the conversion starts from th leftmost digit and accumulates the value as it processess each digit in the string. See #1
 	sign = 1; //Initialised to `1` because the number is assumed to be `positive` until a negative sign is encounted in the input string
-	while (*s == ' ' || *s == '\t' || *s == '\n' || \
-			*s == '\r' || *s == '\f' || *s == '\v') //Skips whitespace characters from the begining of the string, until a non-whitespace character is found
+	while (*s == ' ' || (*s >= 9 && *s <= 13)) //Skips whitespace characters from the begining of the string, until a non-whitespace character is found
 		s++; //Move the the next character to search for a non-whitespace character
 	if (*s == '-' || *s == '+') //Checks for a sign `-` or `+` character
 	{

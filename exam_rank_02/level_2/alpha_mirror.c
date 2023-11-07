@@ -49,8 +49,7 @@ void    alpha_mirror(char *s) //Define a function that takes a pointer to a stri
                 *s = min[i]; //Undo the mirror effect
             i++; //Move to the next character of the `min` an `max` arrays to search for the next match of the current string character
         }
-        write(1, s, 1); //Writes the current character pointed to by `s` to the standard output
-        s++; //Move to the next character of the string for processing
+        write(1, s++, 1); //Writes the current character pointed to by `s` to the standard output then move to the next character of the string for processing
     }
 }
 

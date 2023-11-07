@@ -43,10 +43,7 @@ void    rev_print(char *s)
 
     len = ft_strlen(s); //Calculate the length of the string
     while (len > 0) //Loop as many times as the number of characters in the string
-    {
-        write(1, &s[len - 1], 1); //Write to the standard output, in reverse order, the current character of the string, starting from the last character. `len - 1` because, '\0' is at `len` index 
-        len--; //Decrement the length of the string, and number of characters needed to be printed
-    }
+        write(1, &s[--len], 1); //Write to the standard output, in reverse order, the current character of the string, starting from the last character. `--len` because, '\0' is at `len` index 
 }
 
 int main(int argc, char **argv) //argv is a pointer to an array of strings. By using a double pointer char **argv, the program can access and retrieve each individual argument as a null-terminated string

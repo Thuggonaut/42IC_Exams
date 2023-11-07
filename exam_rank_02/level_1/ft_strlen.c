@@ -22,3 +22,18 @@ size_t ft_strlen(const char *s) //Define a function that takes a pointer to a st
         ;
     return (s - start - 1); //`s` is now pointing to the last index of `s`. The resulting length of `s` is calulated by subtracting the final position of `start` of the string (index `0`) from the position of `s`. The `-1` is to account for the extra increment for the `\0`
 }
+
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char	*s;
+	int		len;
+
+	s = "123456";
+	len = ft_strlen(s);
+	printf("%d\n", len);
+	return (0);
+}
+*/

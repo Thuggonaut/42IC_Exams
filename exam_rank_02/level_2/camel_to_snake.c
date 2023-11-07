@@ -33,8 +33,7 @@ void    camel_to_snake(char *s) //Define a function that takes a pointer to a st
             *s += 32; //Convert the uppercase character to a lowercase character
             write(1, "_", 1); //Print a "_" to the standard output. Note, a "_" will never be printed at index [0] because lowerCamelCase begins with a lowercase 
         }                     //The "_" needs to be printed before the converted character is printed
-        write(1, s, 1); //Prints either the converted character pointed to by `s`, or, if the current character was not uppercase, prints the character as is
-        s++; //Move to the next character of the string for processing
+        write(1, s++, 1); //Prints either the converted character pointed to by `s`, or, if the current character was not uppercase, prints the character as is, before moving to the next character
     }
 }
 
