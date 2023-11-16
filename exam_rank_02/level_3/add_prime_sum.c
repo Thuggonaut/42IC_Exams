@@ -29,9 +29,9 @@ $>
 int ft_atoi(char *s) //Define a function that takes a string representation of a number and return an integer (the actual number)
 {
 	int	res; //Declare an integer variable to store the converted result from string to integer
-    int	sign; //To check for a negative number
+	int	sign; //To check for a negative number
 
-    res = 0; //Initialized to `0` because no conversion has occured yet
+	res = 0; //Initialized to `0` because no conversion has occured yet
 	sign = 1;
 	if (*s == '-') //Check for a negative sign at the start of the string
 	{
@@ -43,30 +43,30 @@ int ft_atoi(char *s) //Define a function that takes a string representation of a
 	return (res * sign); //Return the actual digit of the string representation of an integer
 }
 
-void    ft_putnbr(unsigned int n) //Define a function that takes an integer. The return type is `void` because the function will print the character `res` to the STDOUT
+void	ft_putnbr(unsigned int n) //Define a function that takes an integer. The return type is `void` because the function will print the character `res` to the STDOUT
 {
-	char res; //Declare a character variable to store the converted result from integer to character representation of that integer
-    
-    if (n > 9) //Checks if `n` consists of more than `1` digit
+	char digit; //Declare a character variable to store the converted result from integer to character representation of that integer
+		
+	if (n > 9) //Checks if `n` consists of more than `1` digit
 		ft_putnbr(n / 10); //If so, it calls itself recursively with `n / 10`, effectively removing the last digit of `n`, then passing the remaining digits to the next recursive call
-	res = (n % 10) + '0'; //Calculates the remainder of `n / 10`, effectively giving us the last digit of `n`, then add the ASCII value of `0`, effectively giving us the character representation of the digit, before assigning it to `res`
-	write(1, &res, 1); //Writes the character to the STDOUT
+	digit = (n % 10) + '0'; //Calculates the remainder of `n / 10`, effectively giving us the last digit of `n`, then add the ASCII value of `0`, effectively giving us the character representation of the digit, before assigning it to `res`
+	write(1, &digit, 1); //Writes the character to the STDOUT
 }
 
 int is_prime(unsigned int n) //Declare a function that takes an unsigned integer, checks if it is prime, and returns an integer that determines whether `n` is prime
 {
-    unsigned int i; //Declare an unsigned integer variable to be used as a counter in the loop that checks for factors (not a prime) of `n`
+	unsigned int i; //Declare an unsigned integer variable to be used as a counter in the loop that checks for factors (not a prime) of `n`
 
-    if (n <= 1) //Checks for input numbers less than or equal to `1`
-        return (0); //If so, return `0` for `false` as `1` or less is not a prime number
-    i = 2; //Initialised to `2` because all numbers are divisible by `1` and themselves. If we started from `1` or the number itself, it would always result in finding a divisor and incorrectly identifying the number as non-prime. For a number to be prime, it must have no other divisors apart from 1 and itself
-    while (i * i <= n) //Checks for potential factors of `n`. Squaring `i` and checking it against `n` prevents unnecessary iterations for larger numbers, it is equivalent to checking up to the square root of `n`. Any factors of a number `n` must be less than or equal to the square root of `n`
-    {
-        if (n % i == 0) //Checks if `n` is divisible by `i` (i.e., `i` is a factor of `n`).
-            return (0); //If so, then `n` is not prime, return `0` for `false`
-        i++; //Move to the next number to check for the next potential factor
-    }
-    return (1); //If `n` is not less than or `1`, and if `n` can not be divided evenly by any number from `2` up to the square root of `n`, then `n` is prime. Return `1` for `true`
+	if (n <= 1) //Checks for input numbers less than or equal to `1`
+		return (0); //If so, return `0` for `false` as `1` or less is not a prime number
+	i = 2; //Initialised to `2` because all numbers are divisible by `1` and themselves. If we started from `1` or the number itself, it would always result in finding a divisor and incorrectly identifying the number as non-prime. For a number to be prime, it must have no other divisors apart from 1 and itself
+	while (i * i <= n) //Checks for potential factors of `n`. Squaring `i` and checking it against `n` prevents unnecessary iterations for larger numbers, it is equivalent to checking up to the square root of `n`. Any factors of a number `n` must be less than or equal to the square root of `n`
+	{
+		if (n % i == 0) //Checks if `n` is divisible by `i` (i.e., `i` is a factor of `n`).
+			return (0); //If so, then `n` is not prime, return `0` for `false`
+		i++; //Move to the next number to check for the next potential factor
+	}
+	return (1); //If `n` is not less than or `1`, and if `n` can not be divided evenly by any number from `2` up to the square root of `n`, then `n` is prime. Return `1` for `true`
 }
 
 void add_prime_sum(char *str) //Define a function that takes a string and prints to the STDOUT the `sum` of all prime numbers inferior or equal to a number represented by `char `str`
@@ -89,16 +89,11 @@ void add_prime_sum(char *str) //Define a function that takes a string and prints
 
 int main(int argc, char **argv) //`argv` is a pointer to an array of strings. By using a double pointer `char **argv`, the program can access and retrieve each individual argument as a null-terminated string
 {
-	if (argc != 2 || ft_atoi(argv[1]) < 0) //Check if argument is not 1, or if input is a negative value
-	{
-		write(1, "0\n", 2);
-		exit(0); //Stop executing further
-	}
-	if (argc == 2) //Perform operations only if argc is two, meaning there needs to be 1 argument in addition to the program name
-	{
+	if (argc == 2 &&  ft_atoi(argv[1]) > 0) //Only perform the operation if correct number of args and is a positive
 		add_prime_sum(argv[1]);
-		write(1, "\n", 1);
-	}
+	else
+		write(1, "0", 1);
+	write(1, "\n", 1);
 	return (0);
 }
 
@@ -203,4 +198,9 @@ int main()
 		- We fetch the second char, which is '2'. So `res = res * 10 + 2` --> `res` is now `12`.
 		- We fetch the third char, which is '3'. So `res = res * 10 + 3` --> `res` is now `123`.
 		- After the last digit, there are no more characters, so we stop there and `res` is the integer equivalent of the string.
+
+
+#2	
+If `i` is greater than the square root of `n`, checking for further values of `i` becomes redundant because any potential divisor must have already been 
+found in previous iterations. This significantly reduces the number of unnecessary iterations, making the primality check more efficient.
 */

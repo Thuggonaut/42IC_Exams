@@ -45,7 +45,7 @@ int	ft_atoi_base(const char *s, int base)
 			break ;
 		if (value >= base) //Check if the digit is within the given base
 			break ; //If not, break out of loop
-		result = result * base + value; //Update the result with the new digit
+		result = (result * base) + value; //Update the result with the new digit
 		s++; //Move to the next character for processing
 	}
 	return (result * sign);

@@ -37,7 +37,7 @@ void    putchar_times(char c, int n) //Define a function that write the characte
     while (n > 0) //Loop until `n` becomes `0`
     {
         write(1, &c, 1); //Print the character at the address of `c` to the standard output
-        --n; //Pre-decrement the number of times needed for printing. See #1
+        n--; 
     }
 }
 
@@ -63,11 +63,3 @@ int main(int argc, char **argv) //Write a program that takes argc number of comm
     return (0);
 }
 
-/*
-#1  The pre-decrement operator `--n` is used instead of the post-decrement operator `n--`. Both operators decrease the value of n by 1, but 
-    the difference lies in the order of operations and the value returned.
-
-    The pre-decrement operator `--n` first decreases the value of `n` and then returns the updated value. 
-    
-    In contrast, the post-decrement operator `n-- `returns the current value of `n` and then decreases its value.
-  */

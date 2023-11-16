@@ -29,16 +29,16 @@ _____________
 }
 
 
-/*
+
 #include <stdio.h>
 
 int main()
 {
     unsigned char x = 38; //38 is 0010 0110
-    printf("%d", swap_bits(x)); //Prints 98, which is 0110 0010 in binary
+    printf("%d\n", swap_bits(x)); //Prints 98, which is 0110 0010 in binary
     return (0);
 }
-*/
+
 
 
 /*

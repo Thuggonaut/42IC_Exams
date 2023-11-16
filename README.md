@@ -1,0 +1,149 @@
+EXAM PREP:
+
+# ft_swap *tmp vs tmp
+# repeat_alpha
+# % vs /
+# rotate formula
+# ft_putnbr
+# ft_atoi
+# ft_atoi_base
+- ft_itoa
+- list manipulation
+# bitwise operations
+# prime vs composite numbers
+- powers (n == 1); Base, exponents;
+- caution: program printing the '\0' without showing it. e.g. in epur_str; rev_print;
+
+
+## ft_swap 
+- Account for:
+	1. *tmp vs tmp
+	2. `int		tmp;` doesn't need a pointer because it temporarily stores a regular integer.
+	3. *a and *b are pointers because the values they point to, can be modified. 
+
+
+## repeat_alpha
+- Account for:
+	1. `putchar_times(char c, int n)`
+	2. formula for `n`:
+		- LC: `(*s + 1) - 'a'`
+		- UC: `(*s + 1) - 'A'`
+
+
+## % vs /
+1. `\` integer division, yields the quotient without the remainder.
+2. `%` modulo, yields the remainder, not the quotient. 
+	- result will be 0 if division is even.
+	- result will be the dividend, if it is smaller than the divisor. 
+
+
+
+## rotate formula
+- Account for:
+	1. UC and LC
+	2. `*s = (((*s - 'A' + key) % 26) + 'A')`
+
+
+## ft_putnbr
+- Account for:
+	1. `int digit;` stores the digit, one at a time
+	2. Use recursion, with `(n / 10)` to "descend" through, and removing each digit, from the rightmost, to the leftmost.
+	3. At base case, when `n < 9`, `digit` is updated to the ASCII value of the char represenation of the digit, e.g. `1` becomes `"1"` which is `49` in ASCII.
+	4. Print the ASCII value (e.g. integer `49`) at the address of &digit. 
+	5. Go back to each recursive call, printing the ASCII rightmost digit of `n` until all digits have printed, from leftmost, to rightmost.
+
+
+## ft_atoi
+- Remember, it only converts the inital portion of a string: "*&!+12345. 6789" will print "12345".
+- Account for:
+	1. `int		sign;` for negative values
+	2. `int		result;` initialized to `0` for the formula to work, and stores the converted value
+	3. Skip leading whitespace between 9 and 13, and including `' '` and `'+'`.
+	4. Search for chars that represent digits.
+	5. If found, convert the chars to integers. `res` will be an accumulated value starting from `res = 0`.
+		`res = (res * 10) + (*s++ - '0');`
+	6. If no digits found, return (0). 
+
+
+## ft_atoi_base
+- Account for:
+	1. `int result` to store final result
+	2. `int sign`
+	3. `int value` to store digit value of current character when iterating through each character.
+	4. Check for each character, if digit, LC or UC. Formula of `value` for each:
+		- digit: `*s - ‘0’`
+		- LC: `*s - ‘a’ + 10`
+		- UC: `*s - ‘A’ + 10`
+		- Where `10` represents the base the assignment asks us to convert to. 
+	5. Break program if character is not digit, UC or LC, or if value is larger than the base.
+	6. Result formula: `res = (res * base) + value` 
+
+
+## ft_itoa
+- Account for:
+	1. `len_digits()`
+		- `len` variable to return
+		- account for a negative number
+		- account for `0`
+		- how to iterate through each digit to retrieve the length? `n /= 10` until `n == 0`
+	2. `ft_itoa()`
+		- `str` variable to return
+		- account for longer integer types which int cannot cover
+		- length of number is needed to allocate enough memory for the comverted string
+		- account for negative numbers, both in value, and in the string
+		- account for if number is `0`
+		- assign the digit value, for each string character. Formula:
+			- `*(str + len - 1) = n % 10 + '0'`
+			- `n /= 10`
+
+
+## list manipulation
+- Testing:
+	1. Declare individual nodes
+		- allocate memory for each node
+		- assign the next pointers
+		- printf the list function
+		- free all the nodes
+
+	## bitwise operations
+	- Each bit's worth:
+		1. In binary, each bit is worth `n` to the power of 2: `2^n`
+		2. `n` is the position of the bit from the rightmost bit to the leftmost. 
+		3. `1` is "on", `0` is "off".
+	- Operators:
+		1. `&` "AND" results in `1` if both bits are `1`, else it'll result in `0`.
+		2. `|` "OR" results in `1` if either or bits is `1`.
+		3. `~` "NOT" flips the bits `1`s to `0`s, making the binary number a "two's complement", where the leftmost bit idicates a positive `0` or negative `1`. 
+		4. `^` "XOR" results in `1` if either bit is `1`, and `0` if both bits are the same, e.g. both are `1` or `0`.
+		5. `<<` shifts the bits left, filling in `0`s from the right.
+		6. `>>` shifts the bits right, filling in `0`s from the left. 
+	- Compound assignment:
+		1. Each operator can be used with `=` e.g. `a &= b`, equivalent to `a = a & b`.
+	- Bitmask:
+		1. 15 =  0000 1111, but can also use >> 4
+		2. 240 = 1111 0000, but can also use << 4
+
+
+## prime vs composite numbers
+- Prime numbers:
+	1. A number greater than 1, but is not the product of multiplying two smaller numbers: `2, 3, 5, 7, 11, 13, ...`.
+	2. Has only two distinct positive divisors: 1 and itself.
+- Composite numbers:
+	1. A number that has divisors other than 1 and itself, and can be divided evenly: `4, 6, 8, 9, 10, 12, ...`.
+- add_prime_sum():
+	1. `ft_atoi()` to convert `argv[1]`.
+	2. `ft_putnbr()` to print the sum result.
+	3. `is_prime()` to check for prime numbers:
+		- Account for:
+			1. `unsigned int	i` because needs to be positive. 
+			2. Check if n is 1 or negative, not a prime, return (0)
+			3. `i` initialised to `2` to look for factors (n divisible by i with no remainder), from i to n.
+			4. Iterate from i to n, return (0) if `n % i == 0`
+			5. Return (1) if n is prime.
+	4. `add_prime_sum()` to add all the prime of a number:
+		- Account for:
+			1. `unsigned int	n` to store converted atoi
+			2. `unsigned int	sum` to store the sum result, initialised to `0` for accumulation
+			3. `unsigned int	i` to iterate. Initialised to `2`, the smallest prime
+			4. Iterate from 2 to n, checking for primes, and accumulate sum
+			5. print `sum` at the end of the iterations.

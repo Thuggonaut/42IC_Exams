@@ -88,7 +88,7 @@ HOW IT ALL MADE SENSE TO ME:
     - 9 represented in binary is:
       0000 1001
 
-    - Each of these 8 bits, is worth 2 to the power of something (2^?).
+    - Each of these 8 bits, is worth `n` to the power of 2 (2^n).
     - Starting from the LSB:
       1: 2^0 = 1
       0: 2^1 = 2
@@ -139,11 +139,11 @@ COMMON BITWISE OPERATORS:
     - Bitwise `~ operator is a unary operator (works on only one operand). 
     - It changes `1` to `0` and `0` to `1`. 
     - This flipping of 1s to 0s makes the binary number a "two's complement".
-    - The LSB is used as the sign bit: `0` for positive numbers and `1` for negative numbers. The rest of the bits represent the magnitude of the number. 
+    - The leftmost bit is used as the sign bit: `0` for positive numbers and `1` for negative numbers. The rest of the bits represent the magnitude of the number. 
     - For example, bitwise `~ Operation of 35:
         35 = 0010 0011 (one's complement)
        ~35 = 1101 1100 (two's complement)
-    - Now because the MSB is `1`, this is representing a negative number.
+    - Now because the leftmost bit is `1`, this is representing a negative number.
     - If the number is negative, (the bits start with a `1`), the rest of the number is counting upwards from -128 (instead of 128).
         Bitwise ~ Operation of 35:
         0: 2^0 = 1

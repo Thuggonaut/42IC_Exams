@@ -25,11 +25,10 @@ $
 */
 
 #include <unistd.h> //To call write()
-#include <stdio.h> //That defines `size_t` variable type
 
-size_t ft_strlen(const char *s) //Define a function that takes a pointer to a string, and returns its number of characters up to but not including the null character ('\0')
+int ft_strlen(char *s) //Define a function that takes a pointer to a string, and returns its number of characters up to but not including the null character ('\0')
 {
-    const char *start; //Declare a pointer variable that will store a pointer pointing to the start of `s` 
+    char *start; //Declare a pointer variable that will store a pointer pointing to the start of `s` 
 
     start = s; //Assign to `start` the pointer pointing to `s`
     while (*s++) //This while loop does not need to have any executions inside `{}` brackets. It will loop until the end of `s` is reached, and in each iteration it post-increments the pointer to the next character
@@ -39,11 +38,11 @@ size_t ft_strlen(const char *s) //Define a function that takes a pointer to a st
 
 void    rev_print(char *s)
 {
-    size_t  len; //To store the length of the string
+    int  len; //To store the length of the string
 
     len = ft_strlen(s); //Calculate the length of the string
-    while (len > 0) //Loop as many times as the number of characters in the string
-        write(1, &s[--len], 1); //Write to the standard output, in reverse order, the current character of the string, starting from the last character. `--len` because, '\0' is at `len` index 
+    while (len-- > 0) //Loop as many times as the number of characters in the string. `len--` because, '\0' is at s[len]
+        write(1, &s[len], 1); //Write to the standard output, in reverse order, the current character of the string, starting from the last character
 }
 
 int main(int argc, char **argv) //argv is a pointer to an array of strings. By using a double pointer char **argv, the program can access and retrieve each individual argument as a null-terminated string
