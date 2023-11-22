@@ -107,6 +107,7 @@ EXAM PREP:
 		- printf the list function or the list data
 		- free all the nodes
 
+
 ## bitwise operations
 - Each bit's worth:
 	1. In binary, each bit is worth `n` to the power of 2: `2^n`

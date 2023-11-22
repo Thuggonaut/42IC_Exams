@@ -39,72 +39,72 @@ typedef struct s_list t_list;
 
 struct s_list
 {
-	int     data;
+	int	 data;
 	t_list  *next;
 };
 
 t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 {
-	int	swap;
-	t_list	*tmp;
+	int		temp; //For swapping the values of elements in the linked list during sorting
+	t_list	*head; //Used to keep track of the original head of the list
 
-	tmp = lst;
+	head = lst;
 	while(lst->next != NULL)
 	{
-		if (((*cmp)(lst->data, lst->next->data)) > 0) //Or is it == 0???????
+		if (((*cmp)(lst->data, lst->next->data)) == 0)
 		{
-			swap = lst->data;
+			temp = lst->data;
 			lst->data = lst->next->data;
-			lst->next->data = swap;
-			lst = tmp;
+			lst->next->data = temp;
+			lst = head;
 		}
 		else
 			lst = lst->next;
 	}
-	lst = tmp;
+	lst = head;
 	return (lst);
 }
 
 /*
 #include <stdio.h>
 
-int		compare_int(int a, int b) 
+int		ascending(int a, int b)
 {
-    return (a - b);
+	return (a <= b);
 }
 
 void print_list(t_list *lst) 
 {
-    while (lst) 
+	while (lst) 
 	{
-        printf("%d ", lst->data);
-        lst = lst->next;
-    }
-    printf("\n");
+		printf("%d ", lst->data);
+		lst = lst->next;
+	}
+	printf("\n");
 }
 
 int main() 
 {
-    t_list *node1 = malloc(sizeof(t_list));
-    t_list *node2 = malloc(sizeof(t_list));
-    t_list *node3 = malloc(sizeof(t_list));
+	t_list *node1 = malloc(sizeof(t_list));
+	t_list *node2 = malloc(sizeof(t_list));
+	t_list *node3 = malloc(sizeof(t_list));
 
-    node1->data = 5;
-    node1->next = node2;
+	node1->data = 5;
+	node1->next = node2;
 
-    node2->data = 25;
-    node2->next = node3;
+	node2->data = 25;
+	node2->next = node3;
 
-    node3->data = 0;
-    node3->next = NULL;
+	node3->data = 0;
+	node3->next = NULL;
 
-    printf("Original list: ");
-    print_list(node1);
+	printf("Original list: ");
+	print_list(node1);
 
-    t_list *sorted_list = sort_list(node1, compare_int);
+	t_list *sorted_list = sort_list(node1, ascending);
 
-    printf("Sorted list: ");
-    print_list(sorted_list);
+	printf("Sorted list: ");
+	print_list(sorted_list);
 
-    return (0);
+	return (0);
 }*/
