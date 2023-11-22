@@ -1,5 +1,6 @@
 EXAM PREP:
 
+- print '\0' for debugging
 # ft_swap *tmp vs tmp
 # repeat_alpha
 # % vs /
@@ -7,12 +8,13 @@ EXAM PREP:
 # ft_putnbr
 # ft_atoi
 # ft_atoi_base
-- ft_itoa
+# ft_itoa
 - list manipulation
 # bitwise operations
 # prime vs composite numbers
 - powers (n == 1); Base, exponents;
-- caution: program printing the '\0' without showing it. e.g. in epur_str; rev_print;
+# flood_fill
+- ft_split
 
 
 ## ft_swap 
@@ -35,7 +37,6 @@ EXAM PREP:
 2. `%` modulo, yields the remainder, not the quotient. 
 	- result will be 0 if division is even.
 	- result will be the dividend, if it is smaller than the divisor. 
-
 
 
 ## rotate formula
@@ -101,27 +102,28 @@ EXAM PREP:
 - Testing:
 	1. Declare individual nodes
 		- allocate memory for each node
+		- assign the data
 		- assign the next pointers
-		- printf the list function
+		- printf the list function or the list data
 		- free all the nodes
 
-	## bitwise operations
-	- Each bit's worth:
-		1. In binary, each bit is worth `n` to the power of 2: `2^n`
-		2. `n` is the position of the bit from the rightmost bit to the leftmost. 
-		3. `1` is "on", `0` is "off".
-	- Operators:
-		1. `&` "AND" results in `1` if both bits are `1`, else it'll result in `0`.
-		2. `|` "OR" results in `1` if either or bits is `1`.
-		3. `~` "NOT" flips the bits `1`s to `0`s, making the binary number a "two's complement", where the leftmost bit idicates a positive `0` or negative `1`. 
-		4. `^` "XOR" results in `1` if either bit is `1`, and `0` if both bits are the same, e.g. both are `1` or `0`.
-		5. `<<` shifts the bits left, filling in `0`s from the right.
-		6. `>>` shifts the bits right, filling in `0`s from the left. 
-	- Compound assignment:
-		1. Each operator can be used with `=` e.g. `a &= b`, equivalent to `a = a & b`.
-	- Bitmask:
-		1. 15 =  0000 1111, but can also use >> 4
-		2. 240 = 1111 0000, but can also use << 4
+## bitwise operations
+- Each bit's worth:
+	1. In binary, each bit is worth `n` to the power of 2: `2^n`
+	2. `n` is the position of the bit from the rightmost bit to the leftmost. 
+	3. `1` is "on", `0` is "off".
+- Operators:
+	1. `&` "AND" results in `1` if both bits are `1`, else it'll result in `0`.
+	2. `|` "OR" results in `1` if either or bits is `1`.
+	3. `~` "NOT" flips the bits `1`s to `0`s, making the binary number a "two's complement", where the leftmost bit idicates a positive `0` or negative `1`. 
+	4. `^` "XOR" results in `1` if either bit is `1`, and `0` if both bits are the same, e.g. both are `1` or `0`.
+	5. `<<` shifts the bits left, filling in `0`s from the right.
+	6. `>>` shifts the bits right, filling in `0`s from the left. 
+- Compound assignment:
+	1. Each operator can be used with `=` e.g. `a &= b`, equivalent to `a = a & b`.
+- Bitmask:
+	1. 15 =  0000 1111, but can also use >> 4
+	2. 240 = 1111 0000, but can also use << 4
 
 
 ## prime vs composite numbers
@@ -130,7 +132,12 @@ EXAM PREP:
 	2. Has only two distinct positive divisors: 1 and itself.
 - Composite numbers:
 	1. A number that has divisors other than 1 and itself, and can be divided evenly: `4, 6, 8, 9, 10, 12, ...`.
-- add_prime_sum():
+- Prime factors:
+	1.  Are the prime numbers that divide a given number exactly, without leaving a remainder.
+		- For example, the prime factors of 12 are 2, 2, and 3, because 2 * 2 * 3 equals 12.
+	2. The prime factors of a number are the building blocks that, when multiplied together, give the original number
+- ## add_prime_sum():
+- Re prime numbers.
 	1. `ft_atoi()` to convert `argv[1]`.
 	2. `ft_putnbr()` to print the sum result.
 	3. `is_prime()` to check for prime numbers:
@@ -147,3 +154,32 @@ EXAM PREP:
 			3. `unsigned int	i` to iterate. Initialised to `2`, the smallest prime
 			4. Iterate from 2 to n, checking for primes, and accumulate sum
 			5. print `sum` at the end of the iterations.
+- ## fprime():
+- Re prime factors.
+	1. `int	i` to iterate. Initialised to `2`, the smallest prime
+	2. ensure `1` is printed if `n == 1`
+	3. Loop until `n = 1` because any number multiplied by 1 is valid.
+	4. if `n % i == 0`, it is divided evenly, and we print the first prime factor. 
+	5. if `n /= i > 1`, then `n` needs to be multiplied by another prime factor, another building block, to give us the original number.
+		- print the `*` before retrieving the next prime factor. 
+	6. increment `i` if needed, to find the next prime factor where there are no remainders. 
+	7. ensure `fprime()` is called when input is a positive number. 
+
+
+## flood_fill
+- Use recursion.
+- Account for:
+	1. variable `target` to store the begin points.
+	2. `fill()` helper function
+		- ensure points are within ranges `0 to size`
+		- ensure the current points meet the target points
+		- if conditions met, assign the current points the character to be replaced with
+		- recursively call itself with:
+			1. `x + 1, y` filling the right of x
+			2. `x - 1, y` filling the left of x
+			3. `x, y + 1` filling the top of y
+			4. `x, y - 1` filling the bottom of y
+	3. Call `fill()` with the begin points
+
+
+		
