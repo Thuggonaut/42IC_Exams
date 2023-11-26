@@ -15,7 +15,7 @@ Example:
 
 $> ./last_word "FOR PONY" | cat -e
 PONY$
-$> ./last_word "this        ...       is sparta, then again, maybe    not" | cat -e
+$> ./last_word "this		...	   is sparta, then again, maybe	not" | cat -e
 not$
 $> ./last_word "   " | cat -e
 $
@@ -30,21 +30,16 @@ $>
 
 void	last_word(char *s) //Define a function that takes a pointer to a string, and prints the last word of the string
 {
-	char	*last_space = NULL;
-	char	*current = s; //Initialized to point to the beginning of the input string
+	char	*word = s; //Initialized to point to the beginning of the input string
 
-	while (*current) //Loop until the end of the string is reached
+	while (*s) //Loop until the end of the string is reached
 	{
-		if (*current == ' ' && (*(current + 1) >= 33 && *(current + 1) <= 126)) //Check if the current character is a space && the character following it is within the ASCII range of visible characters (from 33 to 126)
-			last_space = current; //Update to point to the current character, effectively storing the last space before the last word
-		current++; //Move to the next character
+		if ((*s == ' ' || *s == '\t') && (*(s + 1) != ' ' && *(s + 1) != '\t' && *(s + 1) != '\0')) //Check if the current character is a space/tab && the character following it is not
+			word = s + 1; //Set the pointer to point to the last word so far
+		s++;
 	}
-	if (last_space) //Checks if last_space is not NULL, indicating a space character was found before the last word
-	{
-		current = last_space + 1;  //Move to the first character of the last word
-		while (*current && (*current >= 33 && *current <= 127)) //Loop as long as current points to a character within the range of visible ASCII characters
-			write(1, current++, 1); //Write the current character to the stdout, then move to the next character for processing
-	}
+	while (*word && *word != ' ' && *word != '\t') //Loop to the end of the last word is reached
+		write(1, word++, 1); //Print it
 }
 
 int main(int argc, char **argv) //`argv` is a pointer to an array of strings. By using a double pointer `char **argv`, the program can access and retrieve each individual argument as a null-terminated string
@@ -62,3 +57,4 @@ int main(int argc, char **argv) //`argv` is a pointer to an array of strings. By
 		- By initializing `last_space` to `0`, we ensure that the condition in the second while loop will only execute if a `space` or `tab` character has 
 		  been found. If no space or tab character is found in the string, the second loop will not execute, and the function will not print anything.
 */
+

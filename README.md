@@ -68,7 +68,7 @@ EXAM PREP:
 
 ## ft_atoi_base
 - Account for:
-	1. `int result` to store final result
+	1. `int result` to store final result, and is accumulated.
 	2. `int sign`
 	3. `int value` to store digit value of current character when iterating through each character.
 	4. Check for each character, if digit, LC or UC. Formula of `value` for each:
@@ -76,8 +76,8 @@ EXAM PREP:
 		- LC: `*s - ‘a’ + 10`
 		- UC: `*s - ‘A’ + 10`
 		- Where `10` represents the base the assignment asks us to convert to. 
-	5. Break program if character is not digit, UC or LC, or if value is larger than the base.
-	6. Result formula: `res = (res * base) + value` 
+	5. Break program if character is not digit, UC or LC, or if value is >= the base.
+	6. Result formula: `res = (res * base) + value`, the same as ft_atoi()
 
 
 ## ft_itoa
@@ -96,6 +96,7 @@ EXAM PREP:
 		- assign the digit value, for each string character. Formula:
 			- `*(str + len - 1) = n % 10 + '0'`
 			- `n /= 10`
+			- decrement `len`, assigning each digit, backwards.
 
 
 ## list manipulation

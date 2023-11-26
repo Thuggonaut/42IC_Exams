@@ -54,3 +54,31 @@ int	main(int argc, char **argv)
 	write(1, "\n", 1);
 	return (0);
 }
+
+/*
+MY 2ND ATTEMPT WHICH I PREFER:
+
+void	hidenp(char *s1, char *s2)
+{
+	int	 found = 0;
+
+	while (*s1 && *s2)
+	{
+		if (*s1 == *s2)
+		{
+			found = 1;
+			s1++;
+			s2++;
+		}
+		else
+		{
+			found = 0;
+			s2++;
+		}
+	}
+	if (found == 1)
+		write(1, "1", 1);
+	else
+		write(1, "0", 1);
+}
+*/

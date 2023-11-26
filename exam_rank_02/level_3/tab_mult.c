@@ -40,6 +40,7 @@ $>
 */
 
 #include <unistd.h>
+#include <limits.h> //To use the INT_MAX macro
 
 void	ft_putnbr(unsigned int n) //Define a function that takes an integer. The return type is `void` because the function will print the character `res` to the STDOUT
 {
@@ -51,30 +52,33 @@ void	ft_putnbr(unsigned int n) //Define a function that takes an integer. The re
 	write(1, &digit, 1); //Writes the character to the STDOUT
 }
 
-int		ft_atoi(char *s)
+int		ft_atoi(const char *str) //Define a function that takes a string representation of an integer, and converts it into an actual integer value. `const char *` type because we are not modifying the content of the string
 {
-	int		res = 0;
+	int	 sign; //To store the sign of the integer value, and account for the `-` sign if the number is negative
+	int	 res; //To store the integer value that will be processed and converted from the input string
 
-	while (*s == ' ' || *s == '+' || (*s >= 9 && *s <= 13))
-		s++;
-	while (*s)
+	sign = 1; //Initialised to `1` because the number is assumed to be `positive` until a negative sign is encounted in the input string
+	res = 0; //Initialised to `0` because the conversion starts from th leftmost digit and accumulates the value as it processess each digit in the string. See #1
+	if (*str == ' ' || *str == '+' || (*str >= 9 && *str <= 13)) //Skips whitespace characters from the begining of the string, until a non-whitespace character is found, including the '+' as positive values do not need this
+		str++; //Move the the next character to search for a non-whitespace character
+	if (*str == '-') //Indicates a number is negative
 	{
-		if (*s >= '0' && *s <= '9')
-			res = (res * 10) + (*s++ - '0');
-		else 
-			return (0);
+		sign = -1;
+		str++;
 	}
-	return (res);
+	while(*str && (*str >= '0' && *str <= '9')) //Check if the character is a digit 0-9
+		res = (res * 10) + (*str++ - '0'); //Assign to `res` the converted string representation of an integer into an actual integer value. See #2
+	return (res * sign); //If conversion successful, return the result
 }
 
-void		tab_mult(int n)
+void	tab_mult(int n) //Define a function that will display the mult table
 {
-	int		iter = 0;
-	int		res;
+	int		iter = 0; //To keep track of the iterations, we need 9
+	int		res; //To store the sult results
 
-	if (n > (2147483647 / 9))
+	if (n > (INT_MAX / 9)) //Check for int overflow, e.g., if `n * 9` is greater than the max int value. So, if n > 238609294 (max allowable number for n * 9), it will cause an overflow
 		return ;
-	while (iter++ < 9)
+	while (iter++ < 9) 
 	{
 		res = iter * n;
 		ft_putnbr(iter);
@@ -93,9 +97,10 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		n = ft_atoi(argv[1]);
-		if (n > 0)
+		if (n >= 0) //0 is still considered as a poitive number
 			tab_mult(n);
 	}
-	write(1, "\n", 1);
+	else
+		write(1, "\n", 1);
 	return (0);
 }

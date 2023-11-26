@@ -26,10 +26,10 @@ $
 
 #include <unistd.h> //To call write()
 
-void inter(const char *s1, const char *s2) //Define a helper function that takes in two strings, and writes all the characters, without duplicates, that appear in both the strings, in the order of the first string
+void inter(char *s1, char *s2) //Define a helper function that takes in two strings, and writes all the characters, without duplicates, that appear in both the strings, in the order of the first string
 {
-    unsigned char match_count[256] = {0}; //Declare an unsigned character array of size `256` and initialize all its elements to `0`. It will be used to store the frequency of each character in `s2`. See #1
-    unsigned char found[256] = {0}; //Declare a unsigned character array of size `256` and initialize all its elements to `0`. It will be used to store the characters that have already been found in both strings. See #1
+   char match_count[256] = {0}; //Declare ancharacter array of size `256` and initialize all its elements to `0`. It will be used to store the frequency of each character in `s2`. See #1
+   char found[256] = {0}; //Declare acharacter array of size `256` and initialize all its elements to `0`. It will be used to store the characters that have already been found in both strings. See #1
 
     while (*s2) //Loop until the end of `s2` is reached, and iterate through `s2` to populate the `match_count` array
         match_count[*s2++]++; //For each character in `s2`, increment its corresponding element in the `match_count` array. This will store the frequency of each character in `s2`. See #2

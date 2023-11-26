@@ -12,60 +12,62 @@ Your function must be declared as follows:
 char	*ft_itoa(int nbr);
 */
 
-#include <stdlib.h>
+#include <stdlib.h> //To call malloc()
 
-int	len_digits(int n)
+int	len_digits(int n) //Define a function that returns the length of an integer
 {
-	int		len;
+	int		len; //To store the length count
 
 	len = 0;
-	if (n < 0)
+	if (n < 0) //Account for negative numbers
 	{
-		len++;
-		n *= -1;
+		len++; //The `-` sign will need to be allocated for in memory
+		n *= -1; //`n` must be negated in order to later extract each digit from `n`
 	}
-	if (n == 0)
-		len++;
-	while (n)
+	if (n == 0) //Account for if `0`
+		len++; //Which will need to be allocated for memory
+	while (n) //Loop until n reaches `0`, e.g., when a single digit e.g. `0 - 9` is divided by `10`, it will be `0`
 	{
-		n /= 10;
-		len++;
+		n /= 10; //This essentially takes of one rightmost digit at a time
+		len++; //Each time tracking the length count
 	}
 	return (len);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(int nbr) //Define a function that will convert an integer into its represented string
 {
-	char	*str;
-	int		len;
-	long	nb;
+	char	*s; //To store the converted result
+	int		len; //Length needed for memory allocation
+	long	n; //Account for larger data types than `int`
 
-	nb = n;
-	len = len_digits(nb);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
+	n = nbr; 
+	len = len_digits(nbr);
+	s = (char *)malloc(sizeof(char) * (len + 1));
+	if (!s) //Always check if allocation successfull
 		return (NULL);
-	str[len] = '\0';
-	if (nb < 0)
+	s[len] = '\0'; //If successful, null terminate our string. Note, we will be assigning our char array backwards, from the rightmist digit to the leftmost
+	if (n < 0) //Account for negative numbers
 	{
-		*str = '-';
-		nb *= -1;
+		*s = '-'; //If so, assign the first character of the string the `-` sign
+		n *= -1; //`n` must be negated in order to process individual digits later
 	}
-	if (nb == 0)
-		*str = '0';
-	while (nb)
+	if (n == 0) //Account for if `n` is `0`
+		*s = '0';
+	while (n)  //Loop until n reaches `0`, e.g., when a single digit e.g. `0 - 9` is divided by `10`, it will be `0`
 	{
-		*(str + len - 1) = nb % 10 + '0';
-		nb /= 10;
-		len--;
+		*(s + len - 1) = n % 10 + '0'; //From the rightmost digit, assign to our array, the remainder which is the last digit of the number
+		n /= 10; //Takes of the last digit, to process the next digit from the right
+		len--; //Decrement as we assign our char array characters backwards
 	}
-	return (str);
+	return (s);
 }
 
+/*
 #include <stdio.h>
 
 int	main(void)
 {
-	printf("Result of converted string: ''%s''\n", ft_itoa(-2147483648));
+	printf("Result of converted string: '%s'\n", ft_itoa(-2147483648));
 	return (0);
 }
+*/

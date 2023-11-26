@@ -29,10 +29,7 @@ int		ft_atoi(const char *str) //Define a function that takes a string representa
 	}
 	while(*str && (*str >= '0' && *str <= '9')) //Check if the character is a digit 0-9
 		res = (res * 10) + (*str++ - '0'); //Assign to `res` the converted string representation of an integer into an actual integer value. See #2
-	if (res) //Check for a successful conversion, or if the string contained no digits
-		return (res * sign); //If conversion successful, return the result
-	else
-		return (0); //Return 0 is no digits converted
+	return (res * sign); //If conversion successful, return the result
 }
 
 /*

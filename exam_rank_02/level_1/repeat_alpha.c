@@ -63,3 +63,30 @@ int main(int argc, char **argv) //Write a program that takes argc number of comm
     return (0);
 }
 
+/*
+2ND ATTEMPT, ALSO WORKS:
+
+void    putchartimes(char c)
+{
+        int     times = 0;
+
+        if (c >= 'a' && c <= 'z')
+                times = c - 'a' + 1;
+        if (c >= 'A' && c <= 'Z')
+                times = c - 'A' + 1;
+        while (times-- > 0)
+                write(1, &c, 1);
+}
+
+void    repeat_alpha(char *s)
+{
+        while (*s)
+        {
+                if ((*s >= 'a' && *s <= 'z') || (*s >= 'A' && *s <= 'Z'))
+                        putchartimes(*s);
+                else
+                        write(1, s, 1);
+                s++;
+        }
+}
+*/
