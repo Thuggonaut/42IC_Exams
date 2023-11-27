@@ -15,6 +15,7 @@ EXAM PREP:
 - powers (n == 1); Base, exponents;
 # flood_fill
 - ft_split
+# rev_wstr
 
 
 ## ft_swap 
@@ -102,7 +103,7 @@ EXAM PREP:
 ## list manipulation
 - Testing:
 	1. Declare individual nodes
-		- allocate memory for each node
+		- allocate memory for each node `malloc(sizeof(t_list)`
 		- assign the data
 		- assign the next pointers
 		- printf the list function or the list data
@@ -184,4 +185,10 @@ EXAM PREP:
 	3. Call `fill()` with the begin points
 
 
-		
+## rev_wstr
+- Account for:
+	1. `ft_strlen()` and use len-- to iterate backwards
+	2. `int end` to track last character of a word
+	3. `int start` to tract first character
+	4. `int flag` which = `start` to keep track of the last word. `0` implies the end of the string. 
+	5. Make sure the `\0` isn't printed.

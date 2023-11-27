@@ -44,24 +44,29 @@ int		ft_strlen(char *s)
 
 void	rev_wstr(char *s)
 {
-	int		len = ft_strlen(s);
+	int		len = ft_strlen(s); //Store the length of the string
+	int		end; //Store the index of the last character of a word
+	int		start; //Store the index of the first character of a word
+	int		flag; ////Store the index of the `start`. This is needed to keep track of the final word, to not print the " " afterward, if `start` is `0`
 
 	while (len >= 0) //Iterate through the string from the end to the start of the string
 	{
-		while (len >= 0 && (s[len] == ' ' || s[len] == '\t')) //Skip spaces and tabs from the end of the string
+		while (len >= 0 && (s[len] == ' ' || s[len] == '\t' || s[len] == '\0')) //Skip spaces/tabs and the \0 from the end of the string
 			len--;
 
-		int		end = len; //Save the end index of the current word
+		end = len; //Save the end index of the current word
 		while (len >= 0 && s[len] != ' ' && s[len] != '\t') //Move to the beginning of the current word
 			len--;
 
-		int		start = len + 1; //Initialize the start index for printing characters from the current word. `len + 1` because we did `len--` earlier to check for a space
+		start = len + 1; //Initialize the start index for printing characters from the current word. `len + 1` because we did `len--` earlier to check for a space
+		flag = start; //Keep track of the completion of a word. `0` implies the end of a string
 		while (start <= end) //Loop until the end of the current word, as long as start is lesser or equal to end
 		{
 			write(1, &s[start], 1); //Write thr current character
 			start++;
 		}
-		write(1, " ", 1);
+		if (flag) //If there are more words to print
+			write(1, " ", 1);
 	}
 }
 
