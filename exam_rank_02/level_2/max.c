@@ -33,6 +33,29 @@ int max(int *tab, unsigned int len) //Define a function that takes in a integer 
 }
 
 /*
+2ND ATTEMPT, ALSO WORKS:
+
+int             max(int* tab, unsigned int len)
+{
+        int     max = 0;
+        int     *ptr = tab;
+
+        if (*ptr)
+        {
+                while (len > 0)
+                {
+                        if (*ptr > max)
+                                max = *ptr;
+                        ptr++;
+                        len--;
+                }
+                return (max);
+        }
+        return (0);
+}
+*/
+
+/*
 int main()
 {
     int tab[] = {0, 1, 2, 10};

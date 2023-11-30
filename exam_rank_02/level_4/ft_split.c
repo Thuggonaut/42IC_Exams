@@ -12,64 +12,98 @@ lines, or by the start/end of the string.
 
 Your function must be declared as follows:
 
-char    **ft_split(char *str);
+char	**ft_split(char *str);
 */
 
 #include <stdlib.h>
 
-int	count_words(const char *s, char c)
+int		is_delimiter(char c)
 {
-	int words = 0;
+	return (c == ' ' || c == '\t' || c == '\n');
+}
+
+int		count_words(char *s)
+{
+	int		count = 0;
+	int		flag = 0;
 
 	while (*s)
 	{
-		if (*s != c)
+		if (is_delimiter(*s))
+			flag = 0;
+		else if (!flag)
 		{
-			words++;
-			while (*s && *s != c)
-				s++;
+			flag = 1;
+			count++;
 		}
-		else
-			s++;
+		s++;
 	}
-	return (words);
+	return (count);
 }
 
-char	*word_dup(const char *s, int start, int end)
+char	**ft_split(char *str)
 {
-	char	*word;
-	int		i;
+	int		word_count = count_words(str);
+	char	**result = (char **)malloc((word_count + 1) * sizeof(char *));
 
-	i = 0;
-	word = malloc((end - start + 1) * sizeof(char));
-	if (!word)
-		return (NULL);
-	while (start < end)
-		word[i++] = s[start++];
-	word[i] = '\0';
-	return (word);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	if (!s)
-		return (NULL);
-	int size = count_words(s, c);
-	char **result = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!result)
 		return (NULL);
+
 	int i = 0;
-	while (i < size)
+	while (*str)
 	{
-		while (*s == c)
-			s++;
-		int start = s - s;
-		while (*s && *s != c)
-			s++;
-		result[i++] = word_dup(s, start, s - s);
-		if (!result[i - 1])
+		while (is_delimiter(*str))
+			str++;
+		if (*str == '\0')
+			break ;
+
+		char	*start = str;
+		while (*str && !is_delimiter(*str))
+			str++;
+
+		int	 len = str - start;
+		result[i] = (char *)malloc((len + 1) * sizeof(char));
+		if (!result[i])
+		{
+			while (i > 0)
+				free(result[--i]);
+			free(result);
 			return (NULL);
+		}
+
+		int	 j = 0;
+		while (j < len)
+		{
+			result[i][j] = start[j];
+			j++;
+		}
+		result[i][j] = '\0';
+		i++;
 	}
 	result[i] = NULL;
 	return (result);
+}
+
+#include <stdio.h>
+
+int	 main(void)
+{
+	char	*s = "This is a sample string";
+	char	**res = ft_split(s);
+
+	if (!res)
+	{
+		printf("Error in ft_split function\n");
+		return (1);
+	}
+
+	int	 i = 0;
+	while (res[i])
+	{
+		printf("%s\n", res[i]);
+		free(res[i]);
+		i++;
+	}
+	free(res);
+	return (0);
 }

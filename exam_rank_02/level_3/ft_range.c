@@ -6,7 +6,7 @@ Allowed functions: malloc
 
 Write the following function:
 
-int     *ft_range(int start, int end);
+int	 *ft_range(int start, int end);
 
 It must allocate (with malloc()) an array of integers, fill it with consecutive
 values that begin at start and end at end (Including start and end !), then
@@ -22,20 +22,26 @@ Examples:
 
 #include <stdlib.h> //To call malloc()
 
-int     *ft_range(int start, int end)
+int		*ft_range(int start, int end) //Define a function that returns an array of integers from start to end values
 {
-	size_t	len;
-	int	*array;
-	int	*current;
+	int		len = abs(end - start) + 1; //Store absoloute value, incase `end` is a negative value. See #1
+	int		*array = (int *)malloc(len * sizeof(int)); //Allocate memory 
+	int		*tmp; //Used to iterate through the array whil preserving pointer to begining of `array`
 
-	len = (end - start + 1);
-	array = (int *)malloc(len * sizeof(int));
-	if (!array)
+	if (!array) //Check if allocation successfull
 		return (NULL);
-	current = array;
-	while (len-- > 0)
-		*current++ = start++;
-	return (array);
+	tmp = array; //If sucessfull, assign the `tmp` pointer to point to `array`
+	if (start <= end) //Check if the range increases from `start`
+	{
+		while (len-- > 0)
+			*tmp++ = start++; //Assign to `tmp`, `start` and increasing `start` value
+	}
+	else //If the range decreases from `start`
+	{
+		while (len-- > 0)
+			*tmp++ = start--; //Assign to `tmp`, `start` and decreasing `start` value
+	}
+	return (array); //Return the pointer to the begining of the array
 }
 
 /*
@@ -55,4 +61,10 @@ int main(void)
 	}
 	return (0);
 }
+*/
+
+/*
+#1	The abs() function is a standard library function in C, defined in the <stdlib.h> header. 
+		- It is used to calculate the absolute value of an integer. 
+		- The absolute value of a number is its distance from zero on the number line, irrespective of its sign.
 */

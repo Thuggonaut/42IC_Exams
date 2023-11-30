@@ -96,12 +96,13 @@ void	flood_fill(char **tab, t_point size, t_point begin)
 {
 	//Declare a variable and assign it the value of the character at point `begin` in the array `tab`
 	//This character is the one that will be replaced by 'F' during the flood fill
+	//See #1 re order of y(row) vs x(column)
 	char	target = tab[begin.y][begin.x];
 
 	//Declare a helper function fill that takes x and y points. It will recursively fill the (x, y) region with `F`
 	void	fill(int x, int y) 
 	{
-		//Check if the current position (x, y) is within the bounds of the array and if the character at that position is equal to the target character. See # 1
+		//Check if the current position (x, y) is within the bounds of the array and if the character at that position is equal to the target character. See #2
 		if (x >= 0 && x < size.x && y >= 0 && y < size.y && tab[y][x] == target) 
 		{
 			tab[y][x] = 'F'; //Replace the character at position (x, y) in the array with `F`
@@ -156,7 +157,14 @@ int		main(void)
 }
 
 /*
-#1	This line `if (x >= 0 && x < size.x && y >= 0 && y < size.y && tab[y][x] == target)`:
+#1	In C programming, arrays are stored in a row-major order, meaning that elements in the same row are stored next to each other in memory. 
+	So, when you access tab[y][x], you are navigating to the y-th row and then accessing the x-th element in that row.
+
+	For a 2D array in C, it's crucial to use the correct order of indices (tab[y][x]), where the first index refers to the row and the second 
+	index refers to the column. Interchanging them (tab[x][y]) can lead to memory access errors.
+
+
+#2	This line `if (x >= 0 && x < size.x && y >= 0 && y < size.y && tab[y][x] == target)`:
 		- `x >= 0` checks if the current position is not to the left of the array; 
 		- `x < size.x` checks if the x-coordinate is less than the width of the array;
 		-  `y >= 0` checks if the current position is not above the array;

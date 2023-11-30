@@ -61,6 +61,32 @@ int main(int argc, char **argv) //`argv` is a pointer to an array of strings. By
 }
 
 /*
+2ND ATTEMPT, ALSO WORKS:
+
+void    expand_str(char *s)
+{
+        int     first = 0;
+
+        while (*s == ' ' || *s == '\t')
+                s++;
+        while (*s)
+        {
+                if (first == 1 && *s != ' ' && *s != '\t' && (*(s - 1) == ' ' || *(s - 1) == '\t'))
+                {
+                        write(1, "   ", 3);
+                        write(1, s, 1);
+                }
+                else if (*s != ' ' && *s != '\t')
+                {
+                        write(1, s, 1);
+                        first = 1;
+                }
+                s++;
+        }
+}
+*/
+
+/*
 If the next character is not a space, not a tab, and not the end of the string, the code will print three spaces. 
 	- This condition ensures that only when the next character is a part of a word and not a delimiter, the three spaces will be printed.
 	- In other words, after every word, it will skip every delimiter until it finds the dilimeter before the next word, after which it will 

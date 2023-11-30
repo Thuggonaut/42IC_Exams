@@ -25,18 +25,24 @@ Examples:
 
 int	*ft_rrange(int start, int end)
 {
-	int		*array;
-	int 	*current;
-	size_t	len;
+	int		len = abs(start - end) + 1; //Store absoloute value, incase `end` is a negative value
+	int		*array = (int *)malloc(len * sizeof(int)); //Allocate memory 
+	int 	*tmp; //Used to iterate through the array whil preserving pointer to begining of `array`
 
-	len = (end - start + 1);
-	array = (int *)malloc(len * sizeof(int));
-	if (!array)
+	if (!array) //Check if allocation successfull
 		return (NULL);
-	current = array;
-	while (len-- > 0)
-		*current++ = end--;
-	return (array);
+	tmp = array; //If sucessfull, assign the `tmp` pointer to point to `array`
+	if (start <= end) //Check if the range increases from `start`
+	{
+		while (len-- > 0)
+			*tmp++ = end--; //Assign to `tmp`, `end` and increasing `end` value
+	}
+	else //If the range decreases from `start`
+	{
+		while (len-- > 0)
+			*tmp++ = end++; //Assign to `tmp`, `end` and decreasing `end` value
+	}
+	return (array); //Return the pointer to the begining of the array
 }
 
 /*
@@ -47,10 +53,10 @@ int	main(void)
 	int		*array;
 	size_t	len; 
 
-	array = ft_rrange(-3, 10);
+	array = ft_rrange(0, -3);
 	if (array)
 	{
-		len = 14;
+		len = 4;
 		while (len-- > 0)
 			printf("%d\n", *array++);
 	}

@@ -1,6 +1,24 @@
 EXAM PREP:
 
-- print '\0' for debugging
+**DEBUG WITH \0
+```
+int     main(int argc, char **argv)
+{
+        char    *s = argv[1];
+
+        if (argc == 2)
+                rev_print(argv[1]);
+        write(1, "\n", 1);
+        while (*s)
+        {
+                printf("%c (%d)\n", *s, *s);
+                s++;
+        }
+        printf("\\0 (%d)\n", *s); //This line should output 0 as the ascii value. Any different will imply an error or misinterpretation of the \0 handling in the code
+        return (0);
+}
+```
+
 # ft_swap *tmp vs tmp
 # repeat_alpha
 # % vs /
@@ -8,14 +26,17 @@ EXAM PREP:
 # ft_putnbr
 # ft_atoi
 # ft_atoi_base
+# ft_range
 # ft_itoa
 - list manipulation
 # bitwise operations
 # prime vs composite numbers
+# print_hex
 - powers (n == 1); Base, exponents;
 # flood_fill
-- ft_split
+# ft_split
 # rev_wstr
+# rostring
 
 
 ## ft_swap 
@@ -49,14 +70,14 @@ EXAM PREP:
 ## ft_putnbr
 - Account for:
 	1. `int digit;` stores the digit, one at a time
-	2. Use recursion, with `(n / 10)` to "descend" through, and removing each digit, from the rightmost, to the leftmost.
+	2. Use recursion, `if()` loop with `(n / 10)` to "descend" through, and removing each digit, from the rightmost, to the leftmost.
 	3. At base case, when `n < 9`, `digit` is updated to the ASCII value of the char represenation of the digit, e.g. `1` becomes `"1"` which is `49` in ASCII.
 	4. Print the ASCII value (e.g. integer `49`) at the address of &digit. 
 	5. Go back to each recursive call, printing the ASCII rightmost digit of `n` until all digits have printed, from leftmost, to rightmost.
 
 
 ## ft_atoi
-- Remember, it only converts the inital portion of a string: "*&!+12345. 6789" will print "12345".
+- Remember, it only converts the inital portion of a string: "*&!+12345. 6789" will print "12345". 
 - Account for:
 	1. `int		sign;` for negative values
 	2. `int		result;` initialized to `0` for the formula to work, and stores the converted value
@@ -79,6 +100,21 @@ EXAM PREP:
 		- Where `10` represents the base the assignment asks us to convert to. 
 	5. Break program if character is not digit, UC or LC, or if value is >= the base.
 	6. Result formula: `res = (res * base) + value`, the same as ft_atoi()
+
+
+## ft_range:
+- Account for:
+	1. `abs()` to get the absoloute value of `len = (end - start + 1)` when end is a negative number.
+	2. `temp` variable to iterate the array, and preserve the pointer to the begining of `array`.
+	3. Use `len` to iterate.
+		- Check if range increases, `start <= end`
+		- Else the range decreases, in which case, `start` value decreases.
+	4. We're printing from the leftmost to the right, hence `tmp = start`
+## ft_rrange
+- Is the same, except in reverse
+- Everything the same except:
+	1. `len = start - end`
+	2. `end` decrements or increments depending if `end` increases or dereases range. Recall, we're printing from the rightmost to left, hence `tmp = end`
 
 
 ## ft_itoa
@@ -169,12 +205,23 @@ EXAM PREP:
 	7. ensure `fprime()` is called when input is a positive number. 
 
 
+## print_hex
+- Account for:
+	1. `ft_atoi()` since argv is type char
+	2. `print_hex()` recursively calls itself with `n / 16` becuase, 'base 16'
+	3. `char array` that contains the base 16 values
+	4. 
+
+## powers, base, exponents
+- 
+
+
 ## flood_fill
 - Use recursion.
 - Account for:
-	1. variable `target` to store the begin points.
+	1. variable `target` to store the begin points of the array, e.g. `tab[x][y]`
 	2. `fill()` helper function
-		- ensure points are within ranges `0 to size`
+		- ensure each x and y points are within ranges `0 to size`
 		- ensure the current points meet the target points
 		- if conditions met, assign the current points the character to be replaced with
 		- recursively call itself with:
@@ -183,6 +230,7 @@ EXAM PREP:
 			3. `x, y + 1` filling the top of y
 			4. `x, y - 1` filling the bottom of y
 	3. Call `fill()` with the begin points
+	4. Caution where x and y is placed, e.g., must be `tab[y][x]` not `tab[x][y]`
 
 
 ## rev_wstr
@@ -192,3 +240,25 @@ EXAM PREP:
 	3. `int start` to tract first character
 	4. `int flag` which = `start` to keep track of the last word. `0` implies the end of the string. 
 	5. Make sure the `\0` isn't printed.
+
+
+## rostring
+- Account for:
+	1. `malloc` first word to print last
+		- Length of first word
+	2. Temp variables for original string and for first word to preserve pointers and be able to iterate
+	**NOTE: Order of executions**
+	3. Skip leading whitespace and "discard"
+	4. Check for first word and length
+	5. Iterate through remaining string, and again, caution re order of conditions
+		- for an word ending character, print 1 space, remember the '\0' at end of string, need space also
+		- else write the character as is
+	6. Print the first word
+
+
+## ft_split
+- Account for:
+	1. `count_words()`
+	2. `*word_cpy()`
+	3. `ft_split()`
+		- 

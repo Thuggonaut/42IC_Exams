@@ -36,58 +36,57 @@ $>
 */
 
 #include <unistd.h>
+#include <stdlib.h> 
 
-int		ft_strlen(char *s)
+void	rostring(char *str)
 {
-	char	*start = s;
+	int		len = 0; //To store length of first word
+	char	*first; //Extract and duplicate the first word
+	char	*temp; //Needed to preserve pointer to the begining of first word for printing
+	char	*s = str; //Needed to preserve the original pointers where needed. Without this, original string will be skipped and non accessible. Consider `s` is used to iterate, and `str` is for when we need to access its values 
 
-	while (*s++)
-		;
-	return (s - start - 1);
-}
-
-/*void	rostring(char *s)
-{
-	char	*start;
-	
+	//Skip leading whitespace, for both original and secondary pointers - this is like, "discarding" what we dont need
 	while (*s == ' ' || *s == '\t')
-		s++;
-	start = s; //start to point to the start of the first word
-	while (*s != ' ' && *s != '\t' && *s != '\0') //Skip through the first word
-		s++;
-	write(1, s, ft_strlen(s)); //Write the remaining string
-	write(1, " ", 1);
-	write(1, start, s - start); //Write the first word last
-}*/
-
-void	rostring(char *s)
-{
-	char	*start;
-	char	*end;
-	
-	while (*s == ' ' || *s == '\t')
-		s++;
-
-	start = s; //start to point to the start of the first word
-	while (*s != ' ' && *s != '\t' && *s != '\0') //Skip through the first word
-		s++;
-
-	end = s - 1; //end to point to the end of the first word. `s - 1` because previously `s++` skipped the end
-	while (*s) //Write the remaining string, excluding spaces before '\0'
 	{
-		if (*s != ' ' && *s != '\t') //If the current character is not a space, meaning we're inside a word
-			write(1, s, 1);
-		else if (*(s + 1) != ' ' && *(s + 1) != '\t' && *(s + 1) != '\0') //If the current character is a space but the next is not, meaning there's another word
-			write(1, " ", 1);
-		s++;
+		s++; 
+		str++;
 	}
-	write(1, " ", 1);
-	write(1, start, end - start + 1); //Write the first word
+	//Check for printable characters, which will be the first word
+	while (*s && (*s != ' ' && *s != '\t'))
+	{
+		len++; //Track the length for malloc
+		s++; //Skip as we won't need, because we have `str` for duplicating the first word later on
+	}
+	//Extract the first word and cpoy
+	first = (char *)malloc((len + 1) * sizeof(char)); 
+	temp = first; 
+	while (len > 0) //Caution, `len-- > 0` will be incorrect
+	{
+		*temp++ = *str++; //Copy the first word
+		len--;
+	}
+	*temp = '\0'; //Proper null terminate
+	//Iterate through the remaining of the string, and print the rest. Caution, the order of executions is important
+	while (*s)
+	{
+		//Check for the end of a word, where we will print exactly 1 space. Don't forget the word at the end of the string
+		if ((*s != ' ' && *s != '\t') && (*(s + 1) == ' ' || *(s + 1) == '\t' || (*(s + 1) == '\0')))
+		{
+			write(1, s, 1);
+			write(1, " ", 1);
+		}
+		else if (*s != ' ' && *s != '\t') //If not the end of a word, print the character
+			write(1, s, 1);
+		s++; //Incrementing when conditions aren't met, also means we're skipping whitespaces
+	}
+	//Print the first word last
+	while (*first)
+		write(1, first++, 1);
 }
 
 int		main(int argc, char **argv)
 {
-	if (argc >= 2)
+	if (argc > 1)
 		rostring(argv[1]);
 	write(1, "\n", 1);
 	return (0);
