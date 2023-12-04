@@ -33,78 +33,72 @@ int ascending(int a, int b)
 }
 */
 
-#include <stdlib.h>
+#include <stddef.h>
 
 typedef struct s_list t_list;
 
 struct s_list
 {
-	int	 data;
-	t_list  *next;
+        int     data;
+        t_list  *next;
 };
 
-t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
+t_list  *sort_list(t_list* lst, int (*cmp)(int, int))
 {
-	int		temp; //For swapping the values of elements in the linked list during sorting
-	t_list	*head; //Used to keep track of the original head of the list
+        int     tmp; //To store tempory value while nodes are being swapped
 
-	head = lst;
-	while(lst->next != NULL)
-	{
-		if (((*cmp)(lst->data, lst->next->data)) == 0)
-		{
-			temp = lst->data;
-			lst->data = lst->next->data;
-			lst->next->data = temp;
-			lst = head;
-		}
-		else
-			lst = lst->next;
-	}
-	lst = head;
-	return (lst);
+        t_list  *head = lst; //To keep track of the top node
+
+        while (lst->next) //Loop until the end of the list is reached 
+        {
+                if (((*cmp)(lst->data, lst->next->data)) == 0) //Apply the compare function to the first two nodes, `0` means false, not sorted
+                {
+                        tmp = lst->data; //Assign to `tmp` the data of top node so we can swap the first two nodes
+                        lst->data = lst->next->data; //Assign to the top node, the data of the second node
+                        lst->next->data = tmp; //Assign the second node, what was previously the top node's data, completing the swap
+                        lst = head; //Update the top node's pointer, which will now be the previous second node
+                }
+                else
+                        lst = lst->next; //If 1, meaning true, then skip to the next node for comparison
+        }
+        lst = head; //Ensure that the pointer points to the beginning of the sorted list when the function returns
+        return (lst);
 }
 
 /*
 #include <stdio.h>
+#include <stdlib.h>
 
-int		ascending(int a, int b)
+int ascending(int a, int b)
 {
-	return (a <= b);
+        return (a <= b);
 }
 
-void print_list(t_list *lst) 
+int     main(void)
 {
-	while (lst) 
-	{
-		printf("%d ", lst->data);
-		lst = lst->next;
-	}
-	printf("\n");
-}
+        t_list  *node1 = (t_list *)malloc(sizeof(t_list));
+        t_list  *node2 = (t_list *)malloc(sizeof(t_list));
+        t_list  *node3 = (t_list *)malloc(sizeof(t_list));
 
-int main() 
-{
-	t_list *node1 = malloc(sizeof(t_list));
-	t_list *node2 = malloc(sizeof(t_list));
-	t_list *node3 = malloc(sizeof(t_list));
+        node1->data = 5;
+        node2->data = 42;
+        node3->data = -10;
 
-	node1->data = 5;
-	node1->next = node2;
+        node1->next = node2;
+        node2->next = node3;
+        node3->next = NULL;
 
-	node2->data = 25;
-	node2->next = node3;
+        t_list  *sorted = sort_list(node1, ascending);
 
-	node3->data = 0;
-	node3->next = NULL;
+        while (sorted != NULL)
+        {
+                printf("%d ", sorted->data);
+                sorted = sorted->next;
+        }
 
-	printf("Original list: ");
-	print_list(node1);
+        free(node1);
+        free(node2);
+        free(node3);
 
-	t_list *sorted_list = sort_list(node1, ascending);
-
-	printf("Sorted list: ");
-	print_list(sorted_list);
-
-	return (0);
+        return(0);
 }*/

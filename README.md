@@ -27,6 +27,7 @@ int     main(int argc, char **argv)
 # ft_atoi
 # ft_atoi_base
 # ft_range
+# lcm
 # ft_itoa
 - list manipulation
 # bitwise operations
@@ -115,6 +116,16 @@ int     main(int argc, char **argv)
 - Everything the same except:
 	1. `len = start - end`
 	2. `end` decrements or increments depending if `end` increases or dereases range. Recall, we're printing from the rightmost to left, hence `tmp = end`
+
+
+## lcm
+- Need to find the lowest common multiple.
+	1. Check conditions for returning 0.
+	2. `n` variable to store possible common multiples
+	3. assign to `n` the larger value between `a` and `b`
+	3. Create infinite loop, `while (1)` (because non-zero values always true)
+		- increment `n` until a common multiple is found
+		- where `n` is divisble by both `a` and `b` with no remainders
 
 
 ## ft_itoa

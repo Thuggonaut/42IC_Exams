@@ -26,43 +26,36 @@ If at least one integer is null, LCM is equal to 0.
 
 Your function must be prototyped as follows:
 
-  unsigned int    lcm(unsigned int a, unsigned int b);
+  unsigned int	lcm(unsigned int a, unsigned int b);
 */
 
-unsigned int	ft_hcf(unsigned int a, unsigned int b) //Define a function calculates the Highest Common Factor (HCF) or Greatest Common Divisor (GCD) of two numbers using the Euclidean algorithm
+unsigned int lcm(unsigned int a, unsigned int b)
 {
-	unsigned int	temp;
+	unsigned int n; //Used to iterate through potential common multiples
 
-	while (b != 0) //The Euclidean algorithm is used to find the HCF, which is the largest number that divides both a and b
+	if (a == 0 || b == 0) //If either a or b is equal to 0, it means at least one of the integers is zero, so the LCM is also 0
+		  return (0);
+	//Determine which of `a` or `b` is larger, and assign it to `n`, in order to start iterating from the larger number, optimizing the search for the LCM
+	if (a > b)
+		n = a;
+	else
+	   	n = b;
+	while (1) //Create an infinite loop. Any non-zero value is considered true
 	{
-		//Calculate the remainder of a divided by b and swaps the values of a and b in each iteration until b becomes 0. At that point, a contains the HCF
-		temp = b;
-		b = a % b;
-		a = temp;
+		if (n % a == 0 && n % b == 0) //Check if the current value of `n` is a multiple of both `a` and `b`, e.g. there are no remainders when dividing `n` both by a and b
+			return (n);
+		n++; //Repeat the process of checking if the incremented value of `n` is a common multiple, until it finds the smallest positive integer that is divisible by both `a` and `b`
 	}
-	return (a);
-}
-
-unsigned int	lcm(unsigned int a, unsigned int b)
-{
-	unsigned int	hcf;
-
-	if (a ==0 || b == 0) //If either a or b is equal to 0, it means at least one of the integers is zero, so the LCM is also 0
-		return (0);
-	hcf = ft_hcf(a, b);
-	return ((a * b) / hcf);
 }
 
 /*
 #include <stdio.h>
 
-int	main(void)
+int	 main(void)
 {
-	unsigned int	x = 12;
-	unsigned int	y = 18;
-	unsigned int	res = lcm(x, y);
+		int	 x = -1;
+		int	 y = 2932;
 
-	printf("LCM of %u and %u is %u\n", x, y, res);
-	return (0);
-}
-*/
+		printf("LCM of %d and %d is %d\n", x, y, lcm(x, y));
+		return (0);
+}*/

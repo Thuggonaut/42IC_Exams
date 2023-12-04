@@ -84,6 +84,7 @@ char	**ft_split(char *str)
 	return (result);
 }
 
+/*
 #include <stdio.h>
 
 int	 main(void)
@@ -106,4 +107,4 @@ int	 main(void)
 	}
 	free(res);
 	return (0);
-}
+}*/
