@@ -219,9 +219,9 @@ int     main(int argc, char **argv)
 ## print_hex
 - Account for:
 	1. `ft_atoi()` since argv is type char
-	2. `print_hex()` recursively calls itself with `n / 16` becuase, 'base 16'
+	2. if n > 16 `print_hex()` recursively calls itself with `n / 16` becuase, 'base 16'
 	3. `char array` that contains the base 16 values
-	4. 
+	4. write hex[n % 16]
 
 ## powers, base, exponents
 - lowest power of 2 is 1
