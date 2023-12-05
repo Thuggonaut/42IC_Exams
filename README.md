@@ -224,7 +224,8 @@ int     main(int argc, char **argv)
 	4. 
 
 ## powers, base, exponents
-- 
+- lowest power of 2 is 1
+- Always check if n is 0
 
 
 ## flood_fill
