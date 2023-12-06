@@ -79,6 +79,7 @@ char	**ft_split(char *str)
 	array[i] = NULL;
 	return (array);
 }
+
 /*
 #include <stdio.h>
 
@@ -88,7 +89,7 @@ int	main(void)
 	char	**result = ft_split(s);
 
 	printf("Word count is %d\n", wc(s));
-	
+
 	int i = 0;
 	while (result[i])
 	{
@@ -96,4 +97,5 @@ int	main(void)
 		i++;
 	}
 	return (0);
-}*/
+}
+*/

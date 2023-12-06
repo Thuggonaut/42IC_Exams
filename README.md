@@ -270,7 +270,15 @@ int     main(int argc, char **argv)
 
 ## ft_split
 - Account for:
-	1. `count_words()`
-	2. `*word_cpy()`
-	3. `ft_split()`
-		- 
+	1. `word_count()`
+	2. `ft_split()`
+		- word count
+		- **result array
+		- array index [i]
+		1. skip leading whitespace
+		2. Break if end of string
+		3. word start index
+		4. word length
+		5. allocate memory of word in array[i]
+		6. copy current word
+		7. null terminate word, move to next
