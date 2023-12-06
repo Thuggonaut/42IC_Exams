@@ -59,3 +59,10 @@ int	 main(void)
 		printf("LCM of %d and %d is %d\n", x, y, lcm(x, y));
 		return (0);
 }*/
+
+/*
+The lowest common multiple (LCM) of two numbers is the smallest multiple that both numbers can evenly divide into. In the case of 20 and 5:
+
+The multiples of 20 are: 20, 40, 60, 80, 100, ...
+The multiples of 5 are: 5, 10, 15, 20, 25, 30, ...
+*/

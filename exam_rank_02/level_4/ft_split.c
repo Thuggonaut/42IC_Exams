@@ -17,25 +17,19 @@ char	**ft_split(char *str);
 
 #include <stdlib.h>
 
-int		is_delimiter(char c)
+int		wc(char *s)
 {
-	return (c == ' ' || c == '\t' || c == '\n');
-}
-
-int		count_words(char *s)
-{
-	int		count = 0;
-	int		flag = 0;
-
+	int	inword = 0;
+	int	count = 0;
 	while (*s)
 	{
-		if (is_delimiter(*s))
-			flag = 0;
-		else if (!flag)
+		if (*s != ' ' && *s != '\t' && inword == 0)
 		{
-			flag = 1;
+			inword = 1;
 			count++;
 		}
+		else if (*s == ' ' || *s == '\t')
+			inword = 0;
 		s++;
 	}
 	return (count);
@@ -43,68 +37,63 @@ int		count_words(char *s)
 
 char	**ft_split(char *str)
 {
-	int		word_count = count_words(str);
-	char	**result = (char **)malloc((word_count + 1) * sizeof(char *));
+	int		wordcount = wc(str);
+	char	**array = (char **)malloc((wordcount + 1) * sizeof(char *));
+	int		i = 0;
 
-	if (!result)
+	if (!array)
 		return (NULL);
 
-	int i = 0;
 	while (*str)
 	{
-		while (is_delimiter(*str))
+		//Skip leading whitespace
+		while (*str && (*str == ' ' || *str == '\t'))
 			str++;
+		//Break if end of string
 		if (*str == '\0')
 			break ;
-
-		char	*start = str;
-		while (*str && !is_delimiter(*str))
+		//Account for the start of a word
+		char *start = str;
+		//Find the word length
+		while (*str && (*str != ' ' && *str != '\t'))
 			str++;
-
-		int	 len = str - start;
-		result[i] = (char *)malloc((len + 1) * sizeof(char));
-		if (!result[i])
+		int len = str - start;
+		//Allocate memory in array
+		array[i] = (char *)malloc((len + 1) * sizeof(char));
+		if (!array[i])
 		{
-			while (i > 0)
-				free(result[--i]);
-			free(result);
+			free(array);
 			return (NULL);
 		}
-
-		int	 j = 0;
-		while (j < len)
+		//Copy the current word from start to result[i]
+		int word = 0;
+		while (word < len)
 		{
-			result[i][j] = start[j];
-			j++;
+			array[i][word] = start[word];
+			word++;
 		}
-		result[i][j] = '\0';
+		//Null terminate and move to next word/array
+		array[i][word] = '\0';
 		i++;
 	}
-	result[i] = NULL;
-	return (result);
+	array[i] = NULL;
+	return (array);
 }
-
 /*
 #include <stdio.h>
 
-int	 main(void)
+int	main(void)
 {
-	char	*s = "This is a sample string";
-	char	**res = ft_split(s);
+	char	*s = "This is a test string";
+	char	**result = ft_split(s);
 
-	if (!res)
+	printf("Word count is %d\n", wc(s));
+	
+	int i = 0;
+	while (result[i])
 	{
-		printf("Error in ft_split function\n");
-		return (1);
-	}
-
-	int	 i = 0;
-	while (res[i])
-	{
-		printf("%s\n", res[i]);
-		free(res[i]);
+		printf("%s\n", result[i]);
 		i++;
 	}
-	free(res);
 	return (0);
 }*/
