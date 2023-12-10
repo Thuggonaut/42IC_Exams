@@ -41,5 +41,6 @@ int main(int argc, char **argv)
 {
     if (argc == 2) //Perform operations only if argc is two, meaning there is only one argument in addition to the program name
         camel_to_snake(argv[1]); //Convert every lowerCamelCase character into a snake_case format
+	write(1, "\n", 1);
     return (0);
 }

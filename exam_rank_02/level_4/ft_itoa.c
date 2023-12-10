@@ -63,11 +63,39 @@ char	*ft_itoa(int nbr) //Define a function that will convert an integer into its
 }
 
 /*
-#include <stdio.h>
+TEST 2ND ATTEMPT: also works
 
+char	*ft_itoa(int nbr)
+{
+	int		len = len_digits(nbr);
+	char	*res = (char *)malloc((len + 1) * sizeof (char));
+	char	*temp = res;
+	if (nbr < 0)
+	{
+		*temp = '-';
+		nbr *= -1;
+		temp++;
+	}	
+	temp[len] = '\0';
+	while (nbr > 9)
+	{
+		len--;
+		temp[len] = (nbr % 10) + '0';
+		nbr /= 10;
+	}
+	len--;
+	temp[len] = nbr + '0';
+	return (res);
+}
+*/
+
+/*
 int	main(void)
 {
-	printf("Result of converted string: '%s'\n", ft_itoa(-2147483648));
+	int 	n = -123;
+	char	*value = ft_itoa(n);
+
+	printf("Conversion successful if %s is the same as %d\n", value, n);
 	return (0);
 }
 */

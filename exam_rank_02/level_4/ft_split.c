@@ -17,6 +17,11 @@ char	**ft_split(char *str);
 
 #include <stdlib.h>
 
+int	delimiter(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n');
+}
+
 int		wc(char *s)
 {
 	int	inword = 0;
@@ -47,7 +52,7 @@ char	**ft_split(char *str)
 	while (*str)
 	{
 		//Skip leading whitespace
-		while (*str && (*str == ' ' || *str == '\t'))
+		while (delimiter(*str))
 			str++;
 		//Break if end of string
 		if (*str == '\0')
@@ -55,16 +60,11 @@ char	**ft_split(char *str)
 		//Account for the start of a word
 		char *start = str;
 		//Find the word length
-		while (*str && (*str != ' ' && *str != '\t'))
+		while (!delimiter(*str))
 			str++;
 		int len = str - start;
 		//Allocate memory in array
 		array[i] = (char *)malloc((len + 1) * sizeof(char));
-		if (!array[i])
-		{
-			free(array);
-			return (NULL);
-		}
 		//Copy the current word from start to result[i]
 		int word = 0;
 		while (word < len)
@@ -85,15 +85,15 @@ char	**ft_split(char *str)
 
 int	main(void)
 {
-	char	*s = "This is a test string";
-	char	**result = ft_split(s);
-
-	printf("Word count is %d\n", wc(s));
-
+	char *s = "this is a test string";
+	char **array = ft_split(s);
 	int i = 0;
-	while (result[i])
+	int count = wc(s);
+
+	printf("wordcount: %d\n", count);
+	while (i < count)
 	{
-		printf("%s\n", result[i]);
+		printf("%s\n", array[i]);
 		i++;
 	}
 	return (0);

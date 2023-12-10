@@ -77,9 +77,9 @@ void rotate(char *s, int k) //Define a function that takes a string and rotate e
     {
         //FORMULA: *res = ((((ASCI - 'A' or 'a') + key) %26) + 'A' or 'a'). Remember, if `a % b` where `a`is less than `b`, the result is `a` with a remainder of `0`
 		if (*s >= 'a' && *s <= 'z') //Checks for a lowercase alphabet character
-            *s = (((*s - 'a') + k % 26) + 'a'); //Current character is rotated by `k` positions
+            *s = ((*s - 'a') + k) % 26 + 'a'; //Current character is rotated by `k` positions
         else if (*s >= 'A' && *s <= 'Z') //Checks for an uppercase alphabet character
-            *s = (((*s - 'A') + k % 26) + 'A'); //Current character is rotated by `k` positions
+            *s = ((*s - 'A') + k) % 26 + 'A'; //Current character is rotated by `k` positions
         write(1, s++, 1); //Write to the standard output, the rotated alphabet character, or, the non-alphabet character before moving to the next
     }
 }

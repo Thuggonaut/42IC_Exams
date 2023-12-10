@@ -57,6 +57,7 @@ int     main(int argc, char **argv)
 
 ## % vs /
 1. `\` integer division, yields the quotient without the remainder.
+	- result will be 0, if the dividen is smaller than the divisor.
 2. `%` modulo, yields the remainder, not the quotient. 
 	- result will be 0 if division is even.
 	- result will be the dividend, if it is smaller than the divisor. 
@@ -105,12 +106,12 @@ int     main(int argc, char **argv)
 
 ## ft_range:
 - Account for:
-	1. `abs()` to get the absoloute value of `len = (end - start + 1)` when end is a negative number.
+	1. `abs()` to get the absoloute value of `len = (end - start) + 1` when end is a negative number.
 	2. `temp` variable to iterate the array, and preserve the pointer to the begining of `array`.
-	3. Use `len` to iterate.
-		- Check if range increases, `start <= end`
-		- Else the range decreases, in which case, `start` value decreases.
-	4. We're printing from the leftmost to the right, hence `tmp = start`
+	3. Use `len-- > 0` to iterate in either case:
+		4. Check if range increases, `start <= end`
+		5. Else the range decreases, in which case, `start` value decreases.
+	6. We're printing from the leftmost to the right, hence `tmp++ = start++/--`
 ## ft_rrange
 - Is the same, except in reverse
 - Everything the same except:
@@ -123,25 +124,25 @@ int     main(int argc, char **argv)
 	1. Check conditions for returning 0.
 	2. `n` variable to store possible common multiples
 	3. assign to `n` the larger value between `a` and `b`
-	3. Create infinite loop, `while (1)` (because non-zero values always true)
-		- increment `n` until a common multiple is found
-		- where `n` is divisble by both `a` and `b` with no remainders
+	4. Create infinite loop, `while (1)` (because non-zero values always true)
+		5. increment `n` until a common multiple is found
+		6. where `n` is divisble by both `a` and `b` with no remainders
 
 
 ## ft_itoa
 - Account for:
 	1. `len_digits()`
 		- `len` variable to return
-		- account for a negative number
-		- account for `0`
-		- how to iterate through each digit to retrieve the length? `n /= 10` until `n == 0`
+		1. account for a negative number
+		2. account for `0`
+		3. iterate through each digit to retrieve the length? `n /= 10` until `n == 0`
 	2. `ft_itoa()`
 		- `str` variable to return
-		- account for longer integer types which int cannot cover
+		1. account for longer integer types which int cannot cover
 		- length of number is needed to allocate enough memory for the comverted string
-		- account for negative numbers, both in value, and in the string
-		- account for if number is `0`
-		- assign the digit value, for each string character. Formula:
+		2. account for negative numbers, both in value, and in the string
+		3. account for if number is `0`
+		4. assign the digit value, backwards for each string character. Formula:
 			- `*(str + len - 1) = n % 10 + '0'`
 			- `n /= 10`
 			- decrement `len`, assigning each digit, backwards.
@@ -155,6 +156,38 @@ int     main(int argc, char **argv)
 		- assign the next pointers
 		- printf the list function or the list data
 		- free all the nodes
+## ft_list_foreach
+- Account for
+	1. 
+## ft_list_remove_if
+- Account for:
+	1. current pointer
+	2. previous pointer = NULL, to update the next pointer of the previous node when a node is removed
+	3. while current list
+	4. check if current->data and data_ref is = 0
+		5. check if current is head node, if previous pointer = NULL
+			- update headnode to skip to the current's next node before removal `*begin_list = current->next`
+		6. else not headnode
+			- update previous's next node to skip `prev->next = current->next`
+		7. free(current) after removal (via skipping)
+		8. reset `current = prev`
+	9. `prev = current` too keep track of previous before future removal
+	10. `current = current->next` move to the next node
+## sort_list
+- Think about ft_swap()
+- Account for:
+	1. `int temp` to store values while nodes are swapped
+	2. `*head = lst` keep track of top node
+	3. `while (lst->next)` iterate
+		4. check against `*cmp()` if the current data, and the `lst->next->data` == 0 for false
+			5. if so, do the swap the data:
+				- tmp = current
+				- current = next
+				- next = tmp
+				- `lst = head` update top node pointer
+			6. if not, do the skip
+				- `lst = lst->next`
+	7. `lst = head` ensure it points to the top of sorted list before returning
 
 
 ## bitwise operations
@@ -174,6 +207,8 @@ int     main(int argc, char **argv)
 - Bitmask:
 	1. 15 =  0000 1111, but can also use >> 4
 	2. 240 = 1111 0000, but can also use << 4
+## print_bits
+- `while (bit--)`
 
 
 ## prime vs composite numbers
@@ -220,8 +255,9 @@ int     main(int argc, char **argv)
 - Account for:
 	1. `ft_atoi()` since argv is type char
 	2. if n > 16 `print_hex()` recursively calls itself with `n / 16` becuase, 'base 16'
-	3. `char array` that contains the base 16 values
+	3. `char *hex` that contains the base 16 values
 	4. write hex[n % 16]
+
 
 ## powers, base, exponents
 - lowest power of 2 is 1
@@ -233,16 +269,15 @@ int     main(int argc, char **argv)
 - Account for:
 	1. variable `target` to store the begin points of the array, e.g. `tab[x][y]`
 	2. `fill()` helper function
-		- ensure each x and y points are within ranges `0 to size`
-		- ensure the current points meet the target points
-		- if conditions met, assign the current points the character to be replaced with
-		- recursively call itself with:
+		3. check each x and y points are within ranges `>= 0 to size` && check if current points `== target`
+		4. if conditions met, assign the current points the character to be replaced with
+		5. recursively call itself with:
 			1. `x + 1, y` filling the right of x
 			2. `x - 1, y` filling the left of x
 			3. `x, y + 1` filling the top of y
 			4. `x, y - 1` filling the bottom of y
-	3. Call `fill()` with the begin points
-	4. Caution where x and y is placed, e.g., must be `tab[y][x]` not `tab[x][y]`
+	6. Call `fill()` with the begin points
+- Caution where x and y is placed, e.g., must be `tab[y][x]` not `tab[x][y]`
 
 
 ## rev_wstr
@@ -281,4 +316,5 @@ int     main(int argc, char **argv)
 		4. word length
 		5. allocate memory of word in array[i]
 		6. copy current word
+			- `array[i][word] = start[word]`
 		7. null terminate word, move to next

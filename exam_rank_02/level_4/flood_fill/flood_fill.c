@@ -114,7 +114,7 @@ void	flood_fill(char **tab, t_point size, t_point begin)
 	}
 	fill(begin.x, begin.y);
 }
-
+/*
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -154,7 +154,7 @@ int		main(void)
 	for (int i = 0; i < size.y; ++i)
 		printf("%s\n", area[i]);
 	return (0);
-}
+}*/
 
 /*
 #1	In C programming, arrays are stored in a row-major order, meaning that elements in the same row are stored next to each other in memory. 

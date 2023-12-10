@@ -59,14 +59,8 @@ void	fprime(int n) //Define a function that displays the prime factors of a numb
 
 int		main(int argc, char **argv)
 {
-	int		n;
-
 	if (argc == 2)
-	{
-		n = atoi(argv[1]);
-		if (n > 0)
-			fprime(n);
-	}
+		fprime(atoi(argv[1]));
 	printf("\n");
 	return (0);
 }
