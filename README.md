@@ -1,3 +1,5 @@
+(If you're reading this, I apologize this README.md is chaotic - they're my personal notes while studying for exam rank 02)
+
 EXAM PREP:
 
 **DEBUG WITH \0
@@ -19,25 +21,24 @@ int     main(int argc, char **argv)
 }
 ```
 
-# ft_swap *tmp vs tmp
-# repeat_alpha
-# % vs /
-# rotate formula
-# ft_putnbr
-# ft_atoi
-# ft_atoi_base
-# ft_range
-# lcm
-# ft_itoa
-- list manipulation
-# bitwise operations
-# prime vs composite numbers
-# print_hex
-- powers (n == 1); Base, exponents;
-# flood_fill
-# ft_split
-# rev_wstr
-# rostring
+### ft_swap *tmp vs tmp
+### repeat_alpha
+### % vs /
+### rotate formula
+### ft_putnbr
+### ft_atoi
+### ft_atoi_base
+### ft_range
+### lcm
+### ft_itoa
+### list manipulation
+### bitwise operations
+### prime vs composite numbers
+### print_hex
+### flood_fill
+### ft_split
+### rev_wstr
+### rostring
 
 
 ## ft_swap 
