@@ -25,7 +25,8 @@ int	ft_atoi_base(const char *str, int base)
 {
 	int result = 0; //To store the converted digit in base 10
 	int sign = 1;
-
+	int value; //To store the digit value of the current character
+	
 	if (*str == '-') //Check for a minus sign at the start of the string
 	{
 		sign = -1; //If there's a minus sign, set the sign to negative
@@ -33,8 +34,6 @@ int	ft_atoi_base(const char *str, int base)
 	}
 	while (*str) //Loop until the end of the string is reached
 	{
-		int value; //To store the digit value of the current character
-
 		if (*str >= '0' && *str <= '9') //Check if the current character is a digit
 			value = *str - '0'; //Update the value to represent the actual digit, converted by `0`. See #1
 		else if (*str >= 'A' && *str <= 'F') //Check if the current character is an uppercase
@@ -51,7 +50,7 @@ int	ft_atoi_base(const char *str, int base)
 	return (result * sign);
 }
 
-/*
+
 #include <stdio.h> //To call printf() to test function
 
 int main(void)
@@ -59,7 +58,7 @@ int main(void)
     printf("%d\n", ft_atoi_base("19", 16));
 	return (0);
 }
-*/
+
 
 /*
 CONVERSION CALCULATION:

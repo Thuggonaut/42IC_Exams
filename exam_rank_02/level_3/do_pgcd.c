@@ -29,7 +29,7 @@ $
 #include <stdio.h>
 #include <stdlib.h>
 
-unsigned int	ft_hcf(unsigned int a, unsigned int b) //Define a function calculates the Highest Common Factor (HCF) or Greatest Common Divisor (GCD) of two numbers using the Euclidean algorithm
+unsigned int	gcd(unsigned int a, unsigned int b) //Define a function calculates the Highest Common Factor (HCF) or Greatest Common Divisor (GCD) of two numbers using the Euclidean algorithm
 {
 	unsigned int	temp;
 
@@ -45,18 +45,16 @@ unsigned int	ft_hcf(unsigned int a, unsigned int b) //Define a function calculat
 
 int main(int argc, char **argv) 
 {
-	int n1;
-	int n2;
-	int gcd;
-
 	if (argc != 3)
 	{
 		printf("\n");
 		return (1);
 	}
-	n1 = atoi(argv[1]);
-	n2 = atoi(argv[2]);
-	gcd = ft_hcf(n1, n2);
-	printf("%d\n", gcd);
+
+	unsigned int n1 = atoi(argv[1]);
+	unsigned int n2 = atoi(argv[2]);
+	unsigned int res = gcd(n1, n2);
+
+	printf("%d\n", res);
 	return (0);
 }

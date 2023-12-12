@@ -39,13 +39,13 @@ char	*ft_strpbrk(const char *s1, const char *s2) //Define a function that takes 
     return (NULL); //Return NULL to indicate that no match has been found
 }
 
-/*
+
 #include <stdio.h>
 
 int main() 
 {
-    const char s1[] = "examplestring";
-    const char s2[] = "!";
+    const char s1[] = "abcde";
+    const char s2[] = "!  ";
     char *result;
 
     result = ft_strpbrk(s1, s2);
@@ -56,7 +56,7 @@ int main()
     return 0;
 }
 
-
+/*
 The `strpbrk()` function in C is used to find the first character in a string (s1) that matches any character specified in another 
 string (s2). 
 

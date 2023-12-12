@@ -27,11 +27,10 @@ int	*ft_rrange(int start, int end)
 {
 	int		len = abs(start - end) + 1; //Store absoloute value, incase `end` is a negative value
 	int		*array = (int *)malloc(len * sizeof(int)); //Allocate memory 
-	int 	*tmp; //Used to iterate through the array whil preserving pointer to begining of `array`
+	int 	*tmp = array; //Used to iterate through the array whil preserving pointer to begining of `array`
 
 	if (!array) //Check if allocation successfull
 		return (NULL);
-	tmp = array; //If sucessfull, assign the `tmp` pointer to point to `array`
 	if (start <= end) //Check if the range increases from `start`
 	{
 		while (len-- > 0)

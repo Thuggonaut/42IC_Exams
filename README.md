@@ -92,16 +92,15 @@ int     main(int argc, char **argv)
 
 ## ft_atoi_base
 - Account for:
-	1. `int result` to store final result, and is accumulated.
-	2. `int sign`
-	3. `int value` to store digit value of current character when iterating through each character.
-	4. Check for each character, if digit, LC or UC. Formula of `value` for each:
-		- digit: `*s - ‘0’`
-		- LC: `*s - ‘a’ + 10`
-		- UC: `*s - ‘A’ + 10`
-		- Where `10` represents the base the assignment asks us to convert to. 
-	5. Break program if character is not digit, UC or LC, or if value is >= the base.
-	6. Result formula: `res = (res * base) + value`, the same as ft_atoi()
+	1. `int value` to store digit value of current character when iterating through each character.
+	2. Check for each character, if digit, LC or UC. Formula of `value` for each:
+		3. digit: `*s - ‘0’`
+		4. LC: `*s - ‘a’ + 10`
+		5. UC: `*s - ‘A’ + 10`
+			- Where `10` represents the base the assignment asks us to convert to. 
+	6. Break program if character is not digit, UC or LC, or 
+	7. if value is >= the base.
+	8. Result formula: `res = (res * base) + value`, the same as ft_atoi()
 
 
 ## ft_range:
@@ -225,19 +224,20 @@ int     main(int argc, char **argv)
 - Re prime numbers.
 	1. `ft_atoi()` to convert `argv[1]`.
 	2. `ft_putnbr()` to print the sum result.
-	3. `is_prime()` to check for prime numbers:
+		- `char digit`
+		- `if()` recursion 
+	3. `is_prime(unsigned int)` to check for prime numbers:
 		- Account for:
-			1. `unsigned int	i` because needs to be positive. 
+			1. `i` initialised to `2` to look for factors (n divisible by i with no remainder)
 			2. Check if n is 1 or negative, not a prime, return (0)
-			3. `i` initialised to `2` to look for factors (n divisible by i with no remainder), from i to n.
-			4. Iterate from i to n, return (0) if `n % i == 0`
-			5. Return (1) if n is prime.
+			3. Iterate from i to n, return (0) if `n % i == 0`
+			4. Return (1) if n is prime.
 	4. `add_prime_sum()` to add all the prime of a number:
 		- Account for:
-			1. `unsigned int	n` to store converted atoi
+			1. `unsigned int	res` to store converted atoi
 			2. `unsigned int	sum` to store the sum result, initialised to `0` for accumulation
 			3. `unsigned int	i` to iterate. Initialised to `2`, the smallest prime
-			4. Iterate from 2 to n, checking for primes, and accumulate sum
+			4. Iterate from 2 to res, checking for primes, and accumulate sum
 			5. print `sum` at the end of the iterations.
 - ## fprime():
 - Re prime factors.
@@ -318,3 +318,134 @@ int     main(int argc, char **argv)
 		6. copy current word
 			- `array[i][word] = start[word]`
 		7. null terminate word, move to next
+
+
+
+# FINAL NOTES
+
+# LEVEL 2
+
+**ft_strrev**
+- SWAP
+1. char *start; *end; tmp;
+2. while (*end)
+	- end++;
+	- end--;
+3. while (start < end)
+	- tmp = *end;
+	- swap
+
+**reverse_bits**
+- COMPOUND ASSIGNMENT
+1. unsigned char res = 0; int i = 8;
+2. while (i--)
+	3. res <<=;
+	4. res |= octet & 1;
+	5. octet >>= 1;
+
+**print_bits**
+1. int i = 8;
+2. while (i--)
+	3. if octet >> i & 1
+		- write "1"
+	4. else
+		- write "0"
+
+
+# LEVEL 3
+
+**ft_atoi_base**
+- LIKE ATOI (BASE 10) BUT HERE, BASE <= 16
+1. int res = 0; int sign = 1; int value;
+2. if '-', sign = -1, s++;
+3. while (s)
+	4. if digit
+		- value = *s - '0';
+	5. if LC
+		- value = *s - 'a' + 10;
+	6. if UC
+		- value = *s - 'A' + 10;
+	7. else invalid
+		- break ;
+	8. if value >= base
+		- break ;
+	9. res = (res * base) + value;
+
+**add_prime_sum**
+- HELPER FTS
+1. ft_atoi(simple);
+2. put_nbr(unsigned int);
+	- char digit
+	- if n > 9
+		recursion(n /10);
+	- digit = n % 10 + '0'
+	- write &digit
+3. int is_prime(unsigned int):
+	- unsinged int i = 2;
+	- return 0 if n <= 1;
+4. while (i * i <= n)
+	- if n % 1 == 0
+		return (0)
+	i++;
+5. return (1);
+
+**ft_rrange**
+1. int len = abs(start - end) + 1; opposit of ft_range
+2. int *array = malloc 
+3. int *temp = array;
+4. if start <= end
+	- while len-- > 0;
+	- *tmp++ = end--;
+5. else
+	- while len-- > 0;
+	- *tmp++ = end++;
+
+**pgcd**
+- SWAP
+1. unsigned int gcd(unsigned int a, unsigned int b)
+	2. unsigned int tmp;
+	3. while b != 0
+		- tmp = b;
+		- b = a % b;
+		- a = tmp;
+	4. return a;
+5. in int main(), first check if argc != 3, then print \n and return 1
+
+
+# LEVEL 4
+
+**sort_list**
+- SWAP
+1. int tmp; t_list *head = lst;
+2. while (list->next)
+	3. if cmp() first two nodes
+		- tmp = lst->data;
+		- swap
+		- lst = head;
+	4. else
+		- skip to next node
+5. lst = head;
+
+**sort_int_tab**
+- SWAP
+1. unsigned int i = 0; int tmp;
+2. while i < size - 1
+	3. if tab[i] > tab [i + 1]
+		- temp = tab[i];
+		- swap
+		- reset i = 0;
+	4. else
+		i++;
+
+**ft_list_remove_if**
+1. t_list *curr = *begin_list; t_list *prev = NULL;
+2. while curr
+	3. if cmp() 
+		4. if prev == NULL, curr is head
+			- skip to next node
+		5. else not head
+			- skip curr node: prev->next = curr->next;
+	6. prev = curr;
+	7. curr = curr->next
+
+

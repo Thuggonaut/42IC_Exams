@@ -19,7 +19,7 @@ char    *ft_strrev(char *str);
 */
 
 #include <stdio.h>
-
+/*
 size_t ft_strlen(const char *s) //Define a function that takes a pointer to a string, and returns its number of characters up to but not including the null character ('\0')
 {
     const char *start; //Declare a pointer variable that will store a pointer pointing to the start of `s` 
@@ -51,16 +51,38 @@ char *ft_strrev(char *s) //Define a function that takes a pointer to a string, r
 }
 
 
-/*
-int main()
+2ND ATTEMPT, ALSO WORKS:
+*/
+char *ft_strrev(char *str)
 {
-    char s[] = "No diggity"; //Creating a character array that is modifiable. `ft_strrev()` attempts to reverse the string in-place, which means it needs to modify the string. If we use a `char *`, the function will try to modify a read-only string literal, leading to undefined behavior
-    char *reversed_s = ft_strrev(s);
-    printf("%s\n", reversed_s);
-    return (0);
+	char 	*start = str;
+	char 	*end = str;
+	char	temp;
+
+	while (*end)
+		end++;
+	end--; // Move end to the last character (not null terminator)
+
+	while (start < end)
+	{
+		temp = *end;
+		*end = *start;
+		*start = temp;
+		start++;
+		end--;;
+	}
+	return (str);
 }
 
+/*
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+		printf("%s\n", ft_strrev(argv[1]));
+	return (0);
+}*/
 
+/*
 #1  `str + ft_strlen(str) - 1` calculates the memory address of the last character in the string, and is then used to initialize the `end` pointer to point 
     to the last character of the input string `str`.
         - `str` is a pointer pointing to the first character of the string.

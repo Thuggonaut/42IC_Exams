@@ -69,16 +69,15 @@ int is_prime(unsigned int n) //Declare a function that takes an unsigned integer
 	return (1); //If `n` is not less than or `1`, and if `n` can not be divided evenly by any number from `2` up to the square root of `n`, then `n` is prime. Return `1` for `true`
 }
 
-void add_prime_sum(char *str) //Define a function that takes a string and prints to the STDOUT the `sum` of all prime numbers inferior or equal to a number represented by `char `str`
+void add_prime_sum(int n) //Define a function that takes a string and prints to the STDOUT the `sum` of all prime numbers inferior or equal to a number represented by `char `str`
 {
-	unsigned int n; //Declare an unsigned integer variable to store the integer value of the number represented by a string
+	unsigned int res = n; //Declare an unsigned integer variable to store the integer value of the number represented by a string
 	unsigned int sum; //Declare an unsigned integer variable to store the accumulated sum of the prime numbers
 	unsigned int i; //Declare an unsigned integer variable to be used as a counter in a loop
 
-	n = ft_atoi(str); //Assign to `n`, the converted string to integer 
 	sum = 0; //Initialise to `0` to prepare `sum` for its accumulation of prime numbers
 	i = 2; //Initialised to `2` because the smallest prime number is `2`
-	while (i <= n) //Loop from `2` until `n`
+	while (i <= res) //Loop from `2` until `res`
 	{
 		if (is_prime(i)) //Checks if `i` is prime
 			sum += i; //If so, add `i`'s value to `sum`
@@ -89,11 +88,9 @@ void add_prime_sum(char *str) //Define a function that takes a string and prints
 
 int main(int argc, char **argv) //`argv` is a pointer to an array of strings. By using a double pointer `char **argv`, the program can access and retrieve each individual argument as a null-terminated string
 {
-	if (argc == 2 &&  ft_atoi(argv[1]) > 0) //Only perform the operation if correct number of args and is a positive
-		add_prime_sum(argv[1]);
-	else
-		write(1, "0", 1);
-	write(1, "\n", 1);
+	if (argc == 2)
+		add_prime_sum(ft_atoi(argv[1]));
+	write (1, "\n", 1);
 	return (0);
 }
 

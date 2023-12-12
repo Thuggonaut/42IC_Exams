@@ -51,7 +51,7 @@ t_list  *sort_list(t_list* lst, int (*cmp)(int, int))
 
         while (lst->next) //Loop until the end of the list is reached 
         {
-                if (((*cmp)(lst->data, lst->next->data)) == 0) //Apply the compare function to the first two nodes, `0` means false, not sorted
+                if (((cmp)(lst->data, lst->next->data)) == 0) //Apply the compare function to the first two nodes, `0` means false, not sorted
                 {
                         tmp = lst->data; //Assign to `tmp` the data of top node so we can swap the first two nodes
                         lst->data = lst->next->data; //Assign to the top node, the data of the second node
@@ -65,7 +65,7 @@ t_list  *sort_list(t_list* lst, int (*cmp)(int, int))
         return (lst);
 }
 
-/*
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -101,4 +101,4 @@ int     main(void)
         free(node3);
 
         return(0);
-}*/
+}
