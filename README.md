@@ -326,6 +326,14 @@ int     main(int argc, char **argv)
 
 # LEVEL 2
 
+***reverse_bits***
+- COMPOUND ASSIGNMENT
+1. unsigned char res = 0; int i = 8;
+2. while (i--)
+	3. res <<= 1;
+	4. res |= octet & 1;
+	5. octet >>= 1;
+
 **ft_strrev**
 - SWAP
 1. char *start; *end; tmp;
@@ -335,14 +343,6 @@ int     main(int argc, char **argv)
 3. while (start < end)
 	- tmp = *end;
 	- swap
-
-**reverse_bits**
-- COMPOUND ASSIGNMENT
-1. unsigned char res = 0; int i = 8;
-2. while (i--)
-	3. res <<= 1;
-	4. res |= octet & 1;
-	5. octet >>= 1;
 
 **print_bits**
 1. int i = 8;
@@ -355,24 +355,7 @@ int     main(int argc, char **argv)
 
 # LEVEL 3
 
-**ft_atoi_base**
-- LIKE ATOI (BASE 10) BUT HERE, BASE <= 16
-1. int res = 0; int sign = 1; int value;
-2. if '-', sign = -1, s++;
-3. while (s)
-	4. if digit
-		- value = *s - '0';
-	5. if LC
-		- value = *s - 'a' + 10;
-	6. if UC
-		- value = *s - 'A' + 10;
-	7. else invalid
-		- break ;
-	8. if value >= base
-		- break ;
-	9. res = (res * base) + value;
-
-**add_prime_sum**
+***add_prime_sum***
 - HELPER FTS
 1. ft_atoi(simple);
 2. put_nbr(int);
@@ -392,9 +375,26 @@ int     main(int argc, char **argv)
 6. add_prime_sum(int n)
 	- int res = n; sum = 0; i = 2;
 	7. while i <= res
-		- if is_prim(i)
+		- if is_prime(i)
 			- sum += i;
 		- i++;
+
+**ft_atoi_base**
+- LIKE ATOI (BASE 10) BUT HERE, BASE <= 16
+1. int res = 0; int sign = 1; int value;
+2. if '-', sign = -1, s++;
+3. while (s)
+	4. if digit
+		- value = *s - '0';
+	5. if LC
+		- value = *s - 'a' + 10;
+	6. if UC
+		- value = *s - 'A' + 10;
+	7. else invalid
+		- break ;
+	8. if value >= base
+		- break ;
+	9. res = (res * base) + value;
 
 **ft_rrange**
 1. int len = abs(start - end) + 1; opposit of ft_range
@@ -421,7 +421,7 @@ int     main(int argc, char **argv)
 
 # LEVEL 4
 
-**sort_list**
+***sort_list***
 - SWAP
 1. int tmp; t_list *head = lst;
 2. while (list->next)
@@ -433,18 +433,7 @@ int     main(int argc, char **argv)
 		- skip to next node
 5. lst = head;
 
-**sort_int_tab**
-- SWAP
-1. unsigned int i = 0; int tmp;
-2. while i < size - 1
-	3. if tab[i] > tab [i + 1]
-		- temp = tab[i];
-		- swap
-		- reset i = 0;
-	4. else
-		i++;
-
-**ft_list_remove_if**
+***ft_list_remove_if***
 1. t_list *curr = *begin_list; t_list *prev = NULL;
 2. while curr
 	3. if cmp() 
@@ -455,4 +444,13 @@ int     main(int argc, char **argv)
 	6. prev = curr;
 	7. curr = curr->next
 
-
+**sort_int_tab**
+- SWAP
+1. unsigned int i = 0; int tmp;
+2. while i < size - 1
+	3. if tab[i] > tab [i + 1]
+		- temp = tab[i];
+		- swap
+		- reset i = 0;
+	4. else
+		i++;
