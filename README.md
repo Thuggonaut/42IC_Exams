@@ -340,7 +340,7 @@ int     main(int argc, char **argv)
 - COMPOUND ASSIGNMENT
 1. unsigned char res = 0; int i = 8;
 2. while (i--)
-	3. res <<=;
+	3. res <<= 1;
 	4. res |= octet & 1;
 	5. octet >>= 1;
 
