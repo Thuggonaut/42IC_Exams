@@ -375,20 +375,26 @@ int     main(int argc, char **argv)
 **add_prime_sum**
 - HELPER FTS
 1. ft_atoi(simple);
-2. put_nbr(unsigned int);
+2. put_nbr(int);
 	- char digit
 	- if n > 9
 		recursion(n /10);
 	- digit = n % 10 + '0'
 	- write &digit
-3. int is_prime(unsigned int):
-	- unsinged int i = 2;
+3. int is_prime(int):
+	- int i = 2;
 	- return 0 if n <= 1;
-4. while (i * i <= n)
-	- if n % 1 == 0
-		return (0)
-	i++;
-5. return (1);
+	4. while (i * i <= n)
+		- if n % i == 0
+			return (0)
+		i++;
+	5. return (1);
+6. add_prime_sum(int n)
+	- int res = n; sum = 0; i = 2;
+	7. while i <= res
+		- if is_prim(i)
+			- sum += i;
+		- i++;
 
 **ft_rrange**
 1. int len = abs(start - end) + 1; opposit of ft_range

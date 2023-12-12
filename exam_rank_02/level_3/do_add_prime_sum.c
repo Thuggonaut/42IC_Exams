@@ -43,7 +43,7 @@ int ft_atoi(char *s) //Define a function that takes a string representation of a
 	return (res * sign); //Return the actual digit of the string representation of an integer
 }
 
-void	ft_putnbr(unsigned int n) //Define a function that takes an integer. The return type is `void` because the function will print the character `res` to the STDOUT
+void	ft_putnbr(int n) //Define a function that takes an integer. The return type is `void` because the function will print the character `res` to the STDOUT
 {
 	char digit; //Declare a character variable to store the converted result from integer to character representation of that integer
 		
@@ -53,9 +53,9 @@ void	ft_putnbr(unsigned int n) //Define a function that takes an integer. The re
 	write(1, &digit, 1); //Writes the character to the STDOUT
 }
 
-int is_prime(unsigned int n) //Declare a function that takes an unsigned integer, checks if it is prime, and returns an integer that determines whether `n` is prime
+int is_prime(int n) //Declare a function that takes an integer, checks if it is prime, and returns an integer that determines whether `n` is prime
 {
-	unsigned int i; //Declare an unsigned integer variable to be used as a counter in the loop that checks for factors (not a prime) of `n`
+	int i; //Declare an integer variable to be used as a counter in the loop that checks for factors (not a prime) of `n`
 
 	if (n <= 1) //Checks for input numbers less than or equal to `1`
 		return (0); //If so, return `0` for `false` as `1` or less is not a prime number
@@ -71,12 +71,13 @@ int is_prime(unsigned int n) //Declare a function that takes an unsigned integer
 
 void add_prime_sum(int n) //Define a function that takes a string and prints to the STDOUT the `sum` of all prime numbers inferior or equal to a number represented by `char `str`
 {
-	unsigned int res = n; //Declare an unsigned integer variable to store the integer value of the number represented by a string
-	unsigned int sum; //Declare an unsigned integer variable to store the accumulated sum of the prime numbers
-	unsigned int i; //Declare an unsigned integer variable to be used as a counter in a loop
+	int res = n; //Declare an integer variable to store the integer value of the number represented by a string
+	int sum; //Declare an integer variable to store the accumulated sum of the prime numbers
+	int i; //Declare an integer variable to be used as a counter in a loop
 
 	sum = 0; //Initialise to `0` to prepare `sum` for its accumulation of prime numbers
 	i = 2; //Initialised to `2` because the smallest prime number is `2`
+	
 	while (i <= res) //Loop from `2` until `res`
 	{
 		if (is_prime(i)) //Checks if `i` is prime
@@ -88,8 +89,10 @@ void add_prime_sum(int n) //Define a function that takes a string and prints to 
 
 int main(int argc, char **argv) //`argv` is a pointer to an array of strings. By using a double pointer `char **argv`, the program can access and retrieve each individual argument as a null-terminated string
 {
-	if (argc == 2)
+	if (argc == 2 && ft_atoi(argv[1]) > 1)
 		add_prime_sum(ft_atoi(argv[1]));
+	else
+		ft_putnbr(0);
 	write (1, "\n", 1);
 	return (0);
 }
