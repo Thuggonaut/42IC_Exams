@@ -71,14 +71,13 @@ int is_prime(int n) //Declare a function that takes an integer, checks if it is 
 
 void add_prime_sum(int n) //Define a function that takes a string and prints to the STDOUT the `sum` of all prime numbers inferior or equal to a number represented by `char `str`
 {
-	int res = n; //Declare an integer variable to store the integer value of the number represented by a string
 	int sum; //Declare an integer variable to store the accumulated sum of the prime numbers
 	int i; //Declare an integer variable to be used as a counter in a loop
 
 	sum = 0; //Initialise to `0` to prepare `sum` for its accumulation of prime numbers
 	i = 2; //Initialised to `2` because the smallest prime number is `2`
 	
-	while (i <= res) //Loop from `2` until `res`
+	while (i <= n) //Loop from `2` until `n`
 	{
 		if (is_prime(i)) //Checks if `i` is prime
 			sum += i; //If so, add `i`'s value to `sum`

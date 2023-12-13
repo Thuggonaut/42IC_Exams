@@ -373,8 +373,8 @@ int     main(int argc, char **argv)
 		i++;
 	5. return (1);
 6. add_prime_sum(int n)
-	- int res = n; sum = 0; i = 2;
-	7. while i <= res
+	- int sum = 0; i = 2;
+	7. while i <= n
 		- if is_prime(i)
 			- sum += i;
 		- i++;
