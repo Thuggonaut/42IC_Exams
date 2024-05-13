@@ -28,7 +28,49 @@ __second Test A Little Bit   Moar Complex$
 $>
 */
 
-#include <unistd.h> //To call write()
+//Second attempt
+#include <unistd.h>
+#include <stdbool.h>
+
+bool	ws(char c)
+{
+	return (c == 32 || (c >= 9 && c <= 13));
+}
+
+void *str_capitalizer(char *s)
+{
+	if (*s >= 'a' && *s <= 'z')
+		*s -= 32;
+	write(1, s++, 1);
+
+	while (*s)
+	{
+		if ((ws(*(s - 1))) && ((*s >= 'a' && *s <= 'z') || *(s + 1) == '\0'))
+			*s -= 32;
+		else if ((!ws(*(s - 1))) && (*s >= 'A' && *s <= 'Z'))
+			*s += 32;
+		write(1, s++, 1);
+	}
+}
+
+int	 main(int ac, char **av)
+{
+	if (ac >= 2)
+	{
+		int i = 0;
+
+		while (++i < ac)
+		{
+			str_capitalizer(av[i]);
+			write(1, "\n", 1);
+		}
+	}
+	else
+		write(1, "\n", 1);
+	return (0);
+}
+
+/*#include <unistd.h> //To call write()
 
 void	str_capitalizer(char *s) //Define a function that will capitalise the first letter of every word in a string
 {
@@ -61,4 +103,4 @@ int	 main(int argc, char **argv) //Define a program that will return for each ar
 		i++;
 	}
 	return (0);
-}
+}*/
