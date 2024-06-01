@@ -60,7 +60,7 @@ char	**ft_split(char *str)
 		//Account for the start of a word
 		char *start = str;
 		//Find the word length
-		while (!delimiter(*str))
+		while (!delimiter(*str) && *str)
 			str++;
 		int len = str - start;
 		//Allocate memory in array

@@ -11,6 +11,18 @@ Your function must be declared as follows:
 int    ft_strcmp(char *s1, char *s2);
 */
 
+//Second attempt
+int    ft_strcmp(char *s1, char *s2)
+{
+        while (*s1 && *s1 == *s2)
+        {
+                s2++;
+                s1++;
+        }
+        return (*s1 - *s2);
+}
+
+/*
 int    ft_strcmp(char *s1, char *s2) //Define a function that takes in two null-terminated strings and compares the two lexicographically. See #1
 {
     while (*s1 || *s2) //Loop until either the end of string `s1` or string `s2` is reached

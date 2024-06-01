@@ -1,39 +1,28 @@
-// reverse_bits char octet
- 
+int     ft_strlen(char *s)
+{
+        char    *start = s;
+
+        while (*s++)
+                ;
+        return (s - start - 1);
+}
 
 
-// add_prime_sum
+/*int     ft_strlen(char *str)
+{
+        int     len = 0;
 
+        while (*str++)
+                len++;
+        return (len);
+}*/
 
+#include <stdio.h>
 
-//sort_list
-tlist tmp 
-tlist head = lst 
+int     main()
+{
+        char *s = "12345";
 
-while lst>next 
-	if cmp 
-		swap 
-		tmp = lst>dat 
-		lst>data = lst>data>next 
-		lst>data>next> = tmp 
-		lst = head 
-	else
-		lst = lst>next
-	lst = head
-	
-
-
-//ft_list_remove_if
-tlist curr = begin 
-tlist prev = null 
-
-while curr 
-	if cmp 
-		if pre = null, head 
-			begin = curr>next 
-		else not head 
-			prev>next - curr>next 
-		free curr 
-		curr = prev 
-	prev = curr 
-	curr = curr>nect
+        printf("Len: %d\n", ft_strlen(s));
+        return (0);
+}
