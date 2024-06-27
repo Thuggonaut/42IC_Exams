@@ -32,6 +32,12 @@ $>
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
+
+bool	ws(char c)
+{
+	return (c == ' ' || c == '\0' || (c >= 9 && c <= 13));
+}
 
 int		ft_strlen(char *s)
 {
@@ -47,15 +53,15 @@ void	rev_wstr(char *s)
 	int		len = ft_strlen(s); //Store the length of the string
 	int		end; //Store the index of the last character of a word
 	int		start; //Store the index of the first character of a word
-	int		flag; ////Store the index of the `start`. This is needed to keep track of the final word, to not print the " " afterward, if `start` is `0`
+	int		flag; //Store the index of the `start`. This is needed to keep track of the final word, to not print the " " afterward, if `start` is `0`
 
 	while (len >= 0) //Iterate through the string from the end to the start of the string
 	{
-		while (len >= 0 && (s[len] == ' ' || s[len] == '\t' || s[len] == '\0')) //Skip spaces/tabs and the \0 from the end of the string
+		while (len >= 0 && ws(s[len])) //Skip spaces/tabs and the \0 from the end of the string
 			len--;
 
 		end = len; //Save the end index of the current word
-		while (len >= 0 && s[len] != ' ' && s[len] != '\t') //Move to the beginning of the current word
+		while (len >= 0 && !ws(s[len])) //Move to the beginning of the current word
 			len--;
 
 		start = len + 1; //Initialize the start index for printing characters from the current word. `len + 1` because we did `len--` earlier to check for a space

@@ -59,3 +59,5 @@ int main(int argc, char **argv)
     printf("\n"); //If the number of parameters is not 3, the program displays a newline
     return (0);
 }
+
+//if op == *, do in cml: "*"

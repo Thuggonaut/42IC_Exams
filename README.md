@@ -231,7 +231,7 @@ int     main(int argc, char **argv)
 		- Account for:
 			1. `i` initialised to `2` to look for factors (n divisible by i with no remainder)
 			2. Check if n is 1 or negative, not a prime, return (0)
-			3. Iterate from i to n, return (0) if `n % i == 0`
+			3. Iterate from i * i to n, return (0) if `n % i == 0`
 			4. Return (1) if n is prime.
 	4. `add_prime_sum()` to add all the prime of a number:
 		- Account for:

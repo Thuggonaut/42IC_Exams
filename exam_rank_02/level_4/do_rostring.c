@@ -92,26 +92,41 @@ int		main(int argc, char **argv)
 	return (0);
 }
 
-/*
-Work-in progress: trying to make it work without malloc.
-
-/*#include <unistd.h>
+/* 2nd attempt
+#include <unistd.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 bool ws(char c)
 {
-        return (c == ' ' || (c >= 9 && c <= 13));
+    return (c == ' ' || c == '\0' || (c >= 9 && c <= 13));
 }
 
-void    ft(char *s)
+void ft(char *str)
 {
+        int             len = 0;
+        char    *first;
+        char    *temp;
+        char    *s = str;
+
         while (ws(*s))
+        {
                 s++;
-
-        char *first = s;
-
-        while (!ws(*s))
+                str++;
+        }
+        while (*s && !ws(*s))
+        {
+                len++;
                 s++;
+        }
+        first = (char *)malloc((len + 1) * sizeof(char));
+        temp = first;
+        while (len > 0)
+        {
+                *temp++ = *str++;
+                len--;
+        }
+        *temp = '\0';
         while (*s)
         {
                 if (!ws(*s) && ws(*(s + 1)))
@@ -123,78 +138,16 @@ void    ft(char *s)
                         write(1, s, 1);
                 s++;
         }
-        if (!ws(*(s - 1)))
-                write(1, " ", 1);
-        while (!ws(*first))
+        while (*first)
                 write(1, first++, 1);
-}
-
-int     main(int ac, char **av)
-{
-        if (ac >= 2)
-                ft(av[1]);
-        write(1, "\n", 1);
-        return (0);
-}*/
-/*
-#include <unistd.h>
-#include <stdbool.h>
-
-bool ws(char c)
-{
-    return (c == ' ' || c == '\t');
-}
-
-void rostring(char *s)
-{
-    // Skip leading whitespace
-    while (ws(*s))
-        s++;
-
-    // Track the beginning of the first word
-    char *first_word_start = s;
-    char *first_word_end = s;
-
-    // Find the end of the first word
-    while (*first_word_end && !ws(*first_word_end))
-        first_word_end++;
-
-    // Move past the first word and skip whitespace
-    s = first_word_end;
-    while (ws(*s))
-        s++;
-
-    // Print the remaining words
-    while (*s)
-    {
-        // Print the current word
-        while (*s && !ws(*s))
-            write(1, s++, 1);
-
-        // Print a space if there are more words
-        if (*s)
-            write(1, " ", 1);
-
-        // Skip whitespace
-        while (ws(*s))
-            s++;
-    }
-
-    // Print a space if there were other words
-        //but it doesn't work if only one word, prints a space before
-    if (first_word_start != first_word_end)
-        write(1, " ", 1);
-
-    // Print the first word
-    while (first_word_start != first_word_end)
-        write(1, first_word_start++, 1);
 }
 
 int main(int ac, char **av)
 {
     if (ac >= 2)
-        rostring(av[1]);
+        ft(av[1]);
+        write(1, "0", 1);
     write(1, "\n", 1);
-    return 0;
+    return (0);
 }
 */
