@@ -84,4 +84,3 @@
 	- first check for end of words and printing a space
 	- then print other characters
 - print first word
-
