@@ -59,7 +59,7 @@ int is_prime(int n) //Declare a function that takes an integer, checks if it is 
 
 	if (n <= 1) //Checks for input numbers less than or equal to `1`
 		return (0); //If so, return `0` for `false` as `1` or less is not a prime number
-	i = 2; //Initialised to `2` because all numbers are divisible by `1` and themselves. If we started from `1` or the number itself, it would always result in finding a divisor and incorrectly identifying the number as non-prime. For a number to be prime, it must have no other divisors apart from 1 and itself
+	i = 2; //Initialised to `2` because all numbers are divisible by `1` and themselves. If we started from `1` or the number itself, it would always result in finding a divisor and incorrectly identifying the number as non-prime. 
 	while (i * i <= n) //Checks for potential factors of `n`. Squaring `i` and checking it against `n` prevents unnecessary iterations for larger numbers, it is equivalent to checking up to the square root of `n`. Any factors of a number `n` must be less than or equal to the square root of `n`
 	{
 		if (n % i == 0) //Checks if `n` is divisible by `i` (i.e., `i` is a factor of `n`).

@@ -21,3 +21,16 @@ _____________
  0001 | 0100
 
 */ 
+
+unsigned char	swap_bits(unsigned char octet) {
+	return (octet << 4 | octet >> 4); 
+}
+
+#include <stdio.h>
+
+int main()
+{
+	int j = swap_bits(38);
+	printf("%d", j);
+	return (0);
+}

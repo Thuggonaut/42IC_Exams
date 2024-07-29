@@ -24,7 +24,7 @@
 
 ### pgcd
 - Finds the greatest common divisor (GCD) of two numbers: the highest number that both numbers can be divided by exactly.
-- like swap()
+- like swap(), reduce the size of the problem
 - loop until b = 0 `b != 0`
 	- temp = b, `b = a % b`, a = temp
 - `return a`, the gcd
@@ -84,3 +84,21 @@
 	- first check for end of words and printing a space
 	- then print other characters
 - print first word
+
+### ft_itoa
+- `len_digits()`
+- consider n < 0, len++
+- consider n == 0, len++;
+- while `n /= 10` len++;
+- `ft_itoa()`
+- `long n`
+- malloc len + 1
+- null terminate `s[len]`
+- consider negating `n *= -1`
+- consider `'-'` sign, or `0`
+
+### ft_list_remove_if
+- need a tmp pointer to begin_list
+- `*prev = NULL`
+- before `free(current)`, check wether head node or not. 
+- current = prev, prev = current;

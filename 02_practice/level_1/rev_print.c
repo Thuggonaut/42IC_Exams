@@ -24,3 +24,22 @@ $
 ```
 */
  
+ #include <unistd.h>
+
+ void rp(char *s) {
+	int len;
+	char *str = s;
+
+	while (*s++)
+		len++;
+
+	while (len-- >= 0)
+		write(1, &str[len], 1);
+ }
+
+ int main(int ac, char **av) {
+	if (ac == 2)
+		rp(av[1]);
+	write(1, "\n", 1);
+	return (0);
+ }

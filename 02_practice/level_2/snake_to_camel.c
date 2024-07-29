@@ -21,3 +21,34 @@ helloWorld$
 $>./snake_to_camel | cat -e
 $
 */ 
+
+#include <unistd.h>
+#include <stdbool.h>
+
+bool uc(char c) {
+	return (c >= 'A' && c <= 'Z');
+}
+
+bool lc(char c) {
+	return (c >= 'a' && c <= 'z');
+}
+
+void ft(char *s) {
+	while (*s) {
+		if (*(s - 1) == '_') {
+			*s -= 32;
+			write(1, s, 1);
+		}
+		else if (*s != '_')
+			write(1, s, 1);
+		s++;
+	}
+}
+
+int main(int ac, char **av)
+{
+	if (ac == 2)
+		ft(av[1]);
+	write(1, "\n", 1);
+	return (0);
+}

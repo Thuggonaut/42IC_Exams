@@ -21,3 +21,33 @@ Examples:
 
 ***SIMILAR TO ft_range.c BUT IN REVERSE***
 */ 
+
+#include <stdlib.h>
+
+int *ft_rrange(int start, int end) {
+	int len = abs(end - start) + 1;
+	int *arr = (int *)malloc(len * sizeof(int));
+	int *tmp = arr;
+
+	if (end >= start) {
+		while (len-- > 0)
+			*tmp++ = end--;
+	}
+	else if (end <= start) {
+		while (len-- > 0)
+			*tmp++ = end++;
+	}
+	return (arr);
+}
+
+#include <stdio.h>
+
+int main() {
+	int *arr = ft_rrange(0, -3);
+	int len = 4;
+
+	while (len-- > 0) {
+		printf("%d\n", *arr++);
+	}
+	return (0);
+}

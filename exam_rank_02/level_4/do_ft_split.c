@@ -80,12 +80,12 @@ char	**ft_split(char *str)
 	return (array);
 }
 
-/*
+
 #include <stdio.h>
 
 int	main(void)
 {
-	char *s = "this is a test string";
+	char *s = "There     should be an array of 8         words! ";
 	char **array = ft_split(s);
 	int i = 0;
 	int count = wc(s);
@@ -98,4 +98,3 @@ int	main(void)
 	}
 	return (0);
 }
-*/

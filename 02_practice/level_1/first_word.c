@@ -27,3 +27,30 @@ $> ./first_word "  lorem,ipsum  " | cat -e
 lorem,ipsum$
 $>
 */
+
+#include <unistd.h>
+#include <stdbool.h>
+
+bool 	ws(char c)
+{
+	return (c == ' ' || (c >= 9 && c <= 13));
+}
+
+void	ft(char *s)
+{
+	while (ws(*s))
+		s++;
+	
+	while (*s && !ws(*s))
+	{
+		write(1, s++, 1);
+	}
+}
+
+int	main(int ac, char **av)
+{
+	if (ac == 2)
+		ft(av[1]);
+	write(1, "\n", 1);
+	return (0);
+}

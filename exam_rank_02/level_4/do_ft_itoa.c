@@ -19,10 +19,9 @@ int	len_digits(int n) //Define a function that returns the length of an integer
 	int		len; //To store the length count
 
 	len = 0;
-	if (n < 0) //Account for negative numbers
-	{
+	if (n < 0) {//Account for negative numbers
 		len++; //The `-` sign will need to be allocated for in memory
-		n *= -1; //`n` must be negated in order to later extract each digit from `n`
+		n *= -1;
 	}
 	if (n == 0) //Account for if `0`
 		len++; //Which will need to be allocated for memory
@@ -89,7 +88,8 @@ char	*ft_itoa(int nbr)
 }
 */
 
-/*
+#include <stdio.h>
+
 int	main(void)
 {
 	int 	n = -123;
@@ -98,4 +98,3 @@ int	main(void)
 	printf("Conversion successful if %s is the same as %d\n", value, n);
 	return (0);
 }
-*/

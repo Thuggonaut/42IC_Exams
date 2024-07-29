@@ -20,3 +20,38 @@ Your function must be declared as follows:
 
 int	ft_atoi_base(const char *str, int str_base);
 */ 
+
+int	ft_atoi_base(const char *str, int str_base) {
+	int res = 0;
+	int value;
+	int sign = 1;
+
+	if (*str == '-') {
+		sign = -1;
+		str++;
+	}
+
+	while (*str) {
+		if (*str >= '0' && *str <= '9')
+			value = *str - '0';
+		else if (*str >= 'a' && *str <= 'f')
+			value = *str - 'a' + 10;
+		else if (*str >= 'A' && *str <= 'F')
+			value = *str - 'A' + 10;
+		else
+			break;
+		if (value >= str_base)
+			break;
+		res = (res * str_base) + value;
+		str++;
+	}
+	return (res);
+}
+
+
+#include <stdio.h>
+
+int main() {
+	printf("%d\n", ft_atoi_base("a", 16));
+	return (0);
+}

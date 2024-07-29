@@ -27,6 +27,44 @@ $>./wdmatch | cat -e
 $
 */
 
+//2nd attempt preferred
+#include <unistd.h>
+
+void putch(char *s) {
+	while (*s) {
+		write(1, s++, 1);
+	}
+}
+
+void wdmatch(char *s1, char *s2) {
+	int i = 0;
+	char *str1 = s1;
+
+	while (*s1 && *s2) {
+		if (*s1 == *s2) {
+			i = 1;
+			s1++;
+		}
+		else {
+			i = 0;
+			s2++;
+		}
+	}
+	if (i == 1) 
+		putch(str1);
+}
+
+int main(int ac, char **av)
+{
+	if (ac == 3)
+		wdmatch(av[1], av[2]);
+	write(1, "\n", 1);
+	return (0);
+}
+
+
+
+/*
 #include <unistd.h>
 
 void wdmatch(char *s1, char *s2) //Define a function that takes two strings, and prints the first string if all it's letters are contained in the second string, in the order of the second string
@@ -54,7 +92,7 @@ int main(int argc, char **argv) //`argv` is a pointer to an array of strings. By
         wdmatch(argv[1], argv[2]);
     write(1, "\n", 1);
     return (0);
-}
+}*/
 
 
 /*

@@ -25,3 +25,30 @@ $> ./pgcd 17 3 | cat -e
 $> ./pgcd | cat -e
 $
 */ 
+
+/*
+swap with *tmp
+loop b != 0
+a%b
+return a
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int pgcd(int a, int b) {
+	int tmp;
+
+	while (b != 0) {
+		tmp = b;
+		b = a % b;
+		a = tmp;
+	}
+	return (a);
+}
+
+int main(int ac, char **av) {
+	if (ac == 3)
+		printf("%d", pgcd(atoi(av[1]), atoi(av[2])));
+	printf("\n");
+}
