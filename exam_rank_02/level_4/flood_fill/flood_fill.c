@@ -92,27 +92,25 @@ $>
 //`tab` points to a 2D array of characters
 //`size` represents the dimensions of the array
 //`begin` represents the starting point
-void	flood_fill(char **tab, t_point size, t_point begin) 
+typedef struct  s_point
 {
-	//Declare a variable and assign it the value of the character at point `begin` in the array `tab`
-	//This character is the one that will be replaced by 'F' during the flood fill
-	//See #1 re order of y(row) vs x(column)
-	char	target = tab[begin.y][begin.x];
+  int           x;
+  int           y;
+} t_point;
 
-	//Declare a helper function fill that takes x and y points. It will recursively fill the (x, y) region with `F`
-	void	fill(int x, int y) 
-	{
-		//Check if the current position (x, y) is within the bounds of the array and if the character at that position is equal to the target character. See #2
-		if (x >= 0 && x < size.x && y >= 0 && y < size.y && tab[y][x] == target) 
-		{
-			tab[y][x] = 'F'; //Replace the character at position (x, y) in the array with `F`
-			fill(x + 1, y); //Recursively call `fill` for the position to the right of the current position (x, y)
-			fill(x - 1, y); //Recursively call `fill` for the position to the left of the current position (x, y)
-			fill(x, y + 1); //Recursively call `fill` for the position for the position below the current position (x, y)
-			fill(x, y - 1); //Recursively call `fill` for the position for the position above the current position (x, y)
-		}
+void fill(char **tab, t_point size, int x, int y, char target) {
+	if (x >= 0 && x < size.x && y >= 0 && y < size.y && tab[y][x] == target) {
+		tab[y][x] = 'F';
+		fill(tab, size, x + 1, y, target);
+		fill(tab, size, x - 1, y, target);
+		fill(tab, size, x, y + 1, target);
+		fill(tab, size, x, y - 1, target);
 	}
-	fill(begin.x, begin.y);
+}
+
+void flood_fill(char **tab, t_point size, t_point begin) {
+	char target = tab[begin.y][begin.x];
+	fill(tab, size, begin.x, begin.y, target);
 }
 
 #include <stdlib.h>
