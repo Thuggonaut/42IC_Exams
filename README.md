@@ -1,7 +1,3 @@
-(If you're reading this, I apologize this README.md is chaotic - they're my personal notes while studying for exams)
-
-EXAM PREP:
-
 VIM SETTINGS:
 - <vim ~/.vimrc>
 
